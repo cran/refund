@@ -13,7 +13,7 @@ regression by penalized OLS or GLS; and (2) functional principal component regre
 }
 
 \author{
-Philip Reiss \email{phil.reiss@nyumc.org}
+Philip Reiss \email{phil.reiss@nyumc.org} and Lei Huang \email{huangracer@gmail.com}
 
 Maintainer: Lei Huang \email{huangracer@gmail.com}
 }

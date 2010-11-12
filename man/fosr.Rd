@@ -62,7 +62,8 @@ An object of class \code{fosr}, which is a list with the following elements:
 \references{
 Ramsay, J. O., and Silverman, B. W. (2005).  \emph{Functional Data Analysis}, 2nd ed., Chapter 13.  New York: Springer.
 
-Reiss, P. T., Huang, L., and Mennes, M. (2010).  Fast function-on-scalar regression with penalized basis expansions.  \emph{International Journal of Biostatistics}, to appear.  Available at \url{http://works.bepress.com/phil_reiss/16/}}
+Reiss, P. T., Huang, L., and Mennes, M. (2010).  Fast function-on-scalar regression with penalized basis expansions.  \emph{International Journal of Biostatistics}, 6(1), article 28.  Available at \url{http://works.bepress.com/phil_reiss/16/}
+}
 \author{
 Philip Reiss \email{phil.reiss@nyumc.org}}
 \note{

@@ -72,7 +72,6 @@ Philip Reiss \email{phil.reiss@nyumc.org}}
 }
 \examples{
 ##### Octane data example #####
-require(pls)
 data(gasoline)
 
 # Create the requisite functional data objects
