@@ -7,7 +7,8 @@
 Regression with Functional Data
 }
 \description{
-Functions for regression with functional data.  The methods currently implemented can be divided into (I) regression of scalar responses on functional predictors, and (II) regression of functional responses on scalar predictors.  Methods of type (I) include penalized functional regression (Goldsmith et al., 2011) and its longitudinal extension (Goldsmith et al., 2010), as well as functional principal component regression (Reiss and Ogden, 2007).  Category (II) includes the penalized OLS and penalized GLS methods of Reiss et al. (2010).}
+Functions for regression with functional data.  The methods currently implemented can be divided into (I) regression of scalar responses on functional predictors, and (II) regression of functional responses on scalar predictors.  (I) includes penalized functional regression 
+(Goldsmith et al., 2011) and its longitudinal extension (Goldsmith et al., 2010), as well as functional principal component regression (Reiss and Ogden, 2007).  (II) includes the penalized OLS and penalized GLS methods of Reiss et al. (2010).}
 \details{For a complete list of functions type \code{library(help=refund)}.
 }
 
