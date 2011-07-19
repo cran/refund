@@ -26,7 +26,7 @@ a list, each of whose components is a K x K matrix defining a penalty on the bas
 \item{fdobj}{functional data object (class \code{fd}) giving the functional predictors.}
 \item{argvals}{points at which the signals (functional predictors) and the coefficient function are evaluated.  By default, if the functional predictors are given by the n x N  matrix \code{sigmat}, \code{argvals} is set to N equally spaced points from 0 to 1; if they are given by \code{fdobj}, \code{argvals} is set to 401 equally spaced points spanning the domain of the given functions.}
   \item{nc}{
-number of principal components.}
+number of principal components. By default, the smallest number accounting for at least 99\% of the variance in the predictors.}
   \item{covt}{
 covariates: an n-row matrix, or a vector of length n.}
   \item{mean.signal.term}{

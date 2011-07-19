@@ -13,7 +13,10 @@ Functions for regression with functional data.  The methods currently implemente
 }
 
 \author{
-Philip Reiss \email{phil.reiss@nyumc.org}, Lei Huang \email{huangracer@gmail.com}, and Jeff Goldsmith \email{jgoldsmi@jhsph.edu}
+Coordinating authors: 
+Ciprian Crainiceanu \email{ccrainic@jhsph.edu} 
+Philip Reiss \email{phil.reiss@nyumc.org}  
+Contributors: Jeff Goldsmith \email{jgoldsmi@jhsph.edu} and Lei Huang \email{huangracer@gmail.com}
 
 Maintainer: Lei Huang \email{huangracer@gmail.com}
 }
