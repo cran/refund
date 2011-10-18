@@ -21,8 +21,8 @@ Fractional anisotropy tract profiles for the corpus callosum (cca) and the right
   }
 }
 \references{
-Goldsmith, J., Bobb, J., Crainiceanu, C., Caffo, B., and Reich, D. (2011). Penalized Functional Regression. \emph{Journal of Computational and Graphical Statistics}, .., .. - ..
+Goldsmith, J., Bobb, J., Crainiceanu, C., Caffo, B., and Reich, D. (2011). Penalized functional regression. \emph{Journal of Computational and Graphical Statistics}, to appear.
 
-Goldsmith, J., Crainiceanu, C., Caffo, B., and Reich, D. (2010). Longitudinal Penalized Functional Regression. www.bepress.com/jhubiostat/paper216
+Goldsmith, J., Crainiceanu, C., Caffo, B., and Reich, D. (2012). Longitudinal penalized functional regression for cognitive outcomes on neuronal tract measurements. \emph{Journal of the Royal Statistical Society: Series C}, to appear.
 }
 

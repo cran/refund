@@ -38,7 +38,10 @@ lpfr(Y, subj, covariates = NULL, funcs, kz = 30, kb = 30,
   \item{Bounds }{List of bounds of a 95\% confidence interval for the estimated coefficient functions}
 }
 \references{
-Goldsmith, J., Crainiceanu, C., Caffo, B., and Reich, D. (2010). Longitudinal Penalized Functional Regression. www.bepress.com/jhubiostat/paper216
+Goldsmith, J., Crainiceanu, C., Caffo, B., and Reich, D. (2012).
+Longitudinal penalized functional regression for cognitive outcomes on
+neuronal tract measurements. \emph{Journal of the Royal Statistical Society:
+Series C}, to appear.
 }
 \author{
 Jeff Goldsmith <jgoldsmi@jhsph.edu>

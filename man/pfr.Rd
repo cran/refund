@@ -36,7 +36,9 @@ pfr(Y, covariates = NULL, funcs, kz = 30, kb = 30,
   \item{Bounds }{List of bounds of a 95\% confidence interval for the estimated coefficient functions}
 }
 \references{
-Goldsmith, J., Bobb, J., Crainiceanu, C., Caffo, B., and Reich, D. (2011). Penalized Functional Regression. \emph{Journal of Computational and Graphical Statistics}, .., .. - ..
+Goldsmith, J., Bobb, J., Crainiceanu, C., Caffo, B., and Reich, D. (2011).
+Penalized functional regression. \emph{Journal of Computational and
+Graphical Statistics}, to appear.
 }
 \author{
 Jeff Goldsmith <jgoldsmi@jhsph.edu>
