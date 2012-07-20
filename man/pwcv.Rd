@@ -43,9 +43,7 @@ Reiss, P. T., Huang, L., and Mennes, M. (2010).  Fast function-on-scalar regress
 }
 \author{
 Philip Reiss \email{phil.reiss@nyumc.org}}
-\note{
-%%  ~~further notes~~
-}
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
@@ -60,31 +58,29 @@ tempfd <- smooth.basis(day.5,
           CanadianWeather$dailyAv[,,"Temperature.C"], smallbasis)$fd
   
 # Model matrices for "latitude" and "region" models    
-Zreg = cbind(1, model.matrix(~factor(CanadianWeather$region)-1))
-Zlat = model.matrix(~CanadianWeather$coord[,1])
+Xreg = cbind(1, model.matrix(~factor(CanadianWeather$region)-1))
+Xlat = model.matrix(~CanadianWeather$coord[,1])
 
 # Fit each model using fosr() to obtain lambda values for pwcv()
 Lreg = matrix(c(0,1,1,1,1), 1)   # constraint for region model
-regionmod = fosr(tempfd, Zreg, Lreg, method="OLS")
-cv.region = pwcv(tempfd, Zreg, Lreg, regionmod$lambda)
+regionmod = fosr(fdobj=tempfd, X=Xreg, con=Lreg, method="OLS")
+cv.region = pwcv(tempfd, Xreg, Lreg, regionmod$lambda)
 
-latmod = fosr(tempfd, Zlat, method="OLS")
-cv.lat = pwcv(tempfd, Zlat, lambda=latmod$lambda)
+latmod = fosr(fdobj=tempfd, X=Xlat, method="OLS")
+cv.lat = pwcv(tempfd, Xlat, lambda=latmod$lambda)
 
 # The following plots may require a wide graphics window to show up correctly
 par(mfrow=1:2)
 # Plot the functional data
-plot(tempfd, col=1, lty=1, axes=list("axesIntervals"), xlab="", ylab="Mean temperature", main="Temperatures at 35 stations")    
+plot(tempfd, col=1, lty=1, axes=list("axesIntervals"), xlab="", ylab="Mean temperature", 
+     main="Temperatures at 35 stations")    
 box()
 
 # Plot the two models' pointwise CV 
-matplot(regionmod$eval.pts, cbind(cv.region, cv.lat), type='l', col=1, axes=FALSE, xlab="", ylab="MSE.CV", main="Pointwise CV for two models")
+matplot(regionmod$argvals, cbind(cv.region, cv.lat), type='l', col=1, axes=FALSE, 
+        xlab="", ylab="MSE.CV", main="Pointwise CV for two models")
 legend(250, 40, c('Region', 'Latitude'), lty=1:2)
 box()
 axis(2)
 axisIntervals(1)
 }
-
-\keyword{models}
-\keyword{regression}
-\keyword{smooth}

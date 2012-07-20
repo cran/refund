@@ -7,12 +7,12 @@ function(x, level=.05, xlabel="", title=NULL,...) {
     
     else testobj = fosr.perm.test(x, level=level)
     
-	eval.pts = testobj$eval.pts
+	argvals = testobj$argvals
 	F = testobj$F
 	F.perm = testobj$F.perm
 	
-    matplot(eval.pts, t(rbind(F, F.perm)), type='l', col='grey', lty=1, ylab="F statistics", xlab=xlabel, main=title,...)
+    matplot(argvals, t(rbind(F, F.perm)), type='l', col='grey', lty=1, ylab="F statistics", xlab=xlabel, main=title,...)
     abline(h=testobj$critval, col=1+1:length(testobj$level), lty=2)
-    lines(eval.pts, F, col='blue')
+    lines(argvals, F, col='blue')
 }
 

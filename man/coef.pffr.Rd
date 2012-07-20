@@ -2,8 +2,7 @@
 \alias{coef.pffr}
 \title{Get estimated coefficients from a pffr}
 \usage{
-  \method{coef}{pffr} (object, raw = FALSE, se = TRUE, freq
-  = FALSE, n1 = 100, n2 = 40, n3 = 20, ...)
+\method{coef}{pffr} (object, raw = FALSE, se = TRUE, freq = FALSE, n1 = 100, n2 = 40, n3 = 20, ...)
 }
 \arguments{
   \item{object}{a fitted \code{pffr}-object}
@@ -19,9 +18,13 @@
   estimates, else use \code{object$Ve}. See
   \code{\link[mgcv]{gamObject}}}
 
-  \item{n1, n2, n3}{these parameters give the number of
-  gridpoints for 1-/2-/3-dimensional smooth terms for the
-  marginal equidistant grids over the range of the
+  \item{n1}{default: 100 see below}
+
+  \item{n2}{default: 40 see below}
+
+  \item{n3}{default: 20. These parameters give the number
+  of gridpoints for 1-/2-/3-dimensional smooth terms for
+  the marginal equidistant grids over the range of the
   covariates at which the estimated effects are evaluated.}
 
   \item{...}{other arguments, not used.}
@@ -47,9 +50,9 @@
 \description{
   Returns estimated coefficient functions/surfaces
   \eqn{\beta(t), \beta(s,t)} and estimated smooth effects
-  \eqn{f(z), f(x,z)} or \eqn{f(x, z, t)} and their standard
-  errors. Not implemented for smooths in more than 3
-  dimensions.
+  \eqn{f(z), f(x,z)} or \eqn{f(x, z, t)} and their
+  point-wise estimated standard errors. Not implemented for
+  smooths in more than 3 dimensions.
 }
 \author{
   Fabian Scheipl

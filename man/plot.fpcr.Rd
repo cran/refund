@@ -11,9 +11,9 @@ Default plotting for functional principal component regression output}
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-an object created by \code{\link{fpcr}}.}
+an object of class \code{"\link{fpcr}"}.}
   \item{se}{
-If \code{TRUE} (the default), upper and lower lines are added at 2 standard errors (in the Bayesian sense; see Wood, 2006) above and below the coefficient function estimate.  If a positive number is supplied, the standard error is instead multiplied by this number.}
+if \code{TRUE} (the default), upper and lower lines are added at 2 standard errors (in the Bayesian sense; see Wood, 2006) above and below the coefficient function estimate.  If a positive number is supplied, the standard error is instead multiplied by this number.}
   \item{col}{
 color for the line(s).  This should be either a number, or a vector of length 3 for the coefficient function estimate, lower bound, and upper bound, respectively.}
   \item{lty}{
@@ -22,7 +22,7 @@ line type(s) for the coefficient function estimate, lower bound, and upper bound
 \item{\dots}{
 other arguments passed to the underlying plotting function.}
 }
-\details{}
+
 \value{
 None; only a plot is produced.}
 \references{
@@ -31,17 +31,11 @@ Wood, S. N. (2006). \emph{Generalized Additive Models: An Introduction with R}. 
 \author{
 Philip Reiss \email{phil.reiss@nyumc.org}}
 
-\note{
-%%  ~~further notes~~
-}
+
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{\code{\link{fpcr}}, which includes an example.
 }
-\examples{}
 
-\keyword{models}
-\keyword{regression}
-\keyword{smooth}
 

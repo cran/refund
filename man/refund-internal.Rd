@@ -1,15 +1,24 @@
-
 \name{refund-internal}
+\alias{decomp}
+\alias{decomp2d}
+\alias{decomp3d}
+\alias{reconstr}
+\alias{reconstr2d}
+\alias{reconstr3d}
+\alias{fpcr.setup}
+\alias{first.last_test}
+\alias{imwd_test}
+\alias{osplinepen2d}
+\alias{Omegas}
+\alias{lw.test}
 \alias{safeDeparse}
 \alias{getShrtlbls}
 \alias{list2df}
-
-\title{Internal refund Functions}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+Internal functions for the refund package
+}
 \description{
- Internal refund functions
-}
+These functions are ordinarily not to be called by the user, but if you contact the package authors with any questions about them, we'll do our best to clarify matters.}
 
-\details{
-These are not to be called by the user.
-}
-\keyword{ internal }
+
