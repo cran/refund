@@ -1,7 +1,7 @@
 \name{pfr}
 \alias{pfr}
 \title{
-Penalized Functional Regression
+Penalized functional regression
 }
 \description{
 Implements penalized functional regression (Goldsmith et al., 2011) for generalized linear functional models with scalar outcomes.
@@ -11,37 +11,36 @@ pfr(Y, covariates = NULL, funcs, kz = 30, kb = 30,
   smooth.cov = FALSE, family = "gaussian", method = "REML", ...)
 }
 \arguments{
-  \item{Y }{Vector of all outcomes over all visits}
-  \item{covariates }{Matrix of scalar covariates}
-  \item{funcs }{Matrix or list of matrices containing observed functional predictors as rows. NA values are allowed.}
-  \item{kz }{Dimension of principal components basis for the observed functional predictors}
-  \item{kb }{Dimension of the truncated power series spline basis for the coefficient function}
-  \item{smooth.cov }{Logical; do you wish to smooth the covariance matrix of observed functions? Increases computation time, but results in smooth principal components}
-  \item{family }{Generalized linear model family}
-  \item{method }{Method for estimating the smoothing parameters; defaults to REML}
-  \item{... }{Additional arguments passed to the \code{gam} function to fit the regression model.}
+  \item{Y }{vector of all outcomes over all visits}
+  \item{covariates }{matrix of scalar covariates}
+  \item{funcs }{matrix, or list of matrices, containing observed functional predictors as rows. NA values are allowed.}
+  \item{kz }{dimension of principal components basis for the observed functional predictors}
+  \item{kb }{dimension of the truncated power series spline basis for the coefficient function}
+  \item{smooth.cov }{logical; do you wish to smooth the covariance matrix of observed functions? This increases computation time, but results in smooth principal components}
+  \item{family }{generalized linear model family}
+  \item{method }{method for estimating the smoothing parameters; defaults to REML}
+  \item{... }{additional arguments passed to \code{\link[mgcv]{gam}} to fit the regression model.}
 }
 \details{
   Functional predictors are entered as a matrix or, in the case of multiple functional predictors, as a list of matrices using the \code{funcs} argument. Missing values are allowed in the functional predictors, but it is assumed that they are observed over the same grid. Functional coefficients and confidence bounds are returned as lists in the same order as provided in the \code{funcs} argument, as are principal component and spline bases.
 }
 \value{
-  \item{fit }{The result of the call to \code{gam}}
-  \item{fitted.vals }{Predicted outcomes}
-  \item{betaHat }{List of estimated coefficient functions}
-  \item{beta.covariates }{Parameter estimates for scalar covariates}
-  \item{X }{Design matrix used in the model fit}
-  \item{phi }{List of truncated power series spline bases for the coefficient functions}
-  \item{psi }{List of principal components basis for the functional predictors}
-  \item{varBetaHat }{List containing covariance matrices for the estimated coefficient functions}
-  \item{Bounds }{List of bounds of a 95\% confidence interval for the estimated coefficient functions}
+  \item{fit }{result of the call to \code{gam}}
+  \item{fitted.vals }{predicted outcomes}
+  \item{betaHat }{list of estimated coefficient functions}
+  \item{beta.covariates }{parameter estimates for scalar covariates}
+  \item{X }{design matrix used in the model fit}
+  \item{phi }{list of truncated power series spline bases for the coefficient functions}
+  \item{psi }{list of principal components basis for the functional predictors}
+  \item{varBetaHat }{list containing covariance matrices for the estimated coefficient functions}
+  \item{Bounds }{list of bounds of a 95\% confidence interval for the estimated coefficient functions}
 }
 \references{
 Goldsmith, J., Bobb, J., Crainiceanu, C., Caffo, B., and Reich, D. (2011).
-Penalized functional regression. \emph{Journal of Computational and
-Graphical Statistics}, to appear.
+Penalized functional regression. \emph{Journal of Computational and Graphical Statistics}, 20(4), 830-851.
 }
 \author{
-Jeff Goldsmith <jgoldsmi@jhsph.edu>
+Jeff Goldsmith <jeff.goldsmith@columbia.edu>
 }
 \examples{
 ##################################################################
@@ -126,7 +125,6 @@ matplot(cbind(fit.rcst$BetaHat[[1]], fit.rcst$Bounds[[1]]),
 
 data(gasoline)
 Y = gasoline$octane
-#detach("package:refund")
 funcs = gasoline$NIR
 wavelengths = as.matrix(2*450:850)
 

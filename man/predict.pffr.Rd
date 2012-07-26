@@ -2,13 +2,13 @@
 \alias{predict.pffr}
 \title{Prediction for penalized function-on-function regression}
 \usage{
-  \method{predict}{pffr} (object, newdata, reformat = TRUE,
-  type = "link", se.fit = FALSE, terms = NULL, ...)
+\method{predict}{pffr}(object, newdata, reformat = TRUE, type = "link", se.fit = FALSE,
+        terms = NULL, ...)
 }
 \arguments{
   \item{object}{a fitted \code{pffr}-object}
 
-  \item{newdata}{A named list containing the values of the
+  \item{newdata}{a named list containing the values of the
   model covariates at which predictions are required. If
   this is not provided then predictions corresponding to
   the original data are returned. If \code{newdata} is
@@ -31,7 +31,7 @@
 
   \item{se.fit}{see \code{\link[mgcv]{predict.gam}()}}
 
-  \item{terms}{If \code{type=="terms"} or \code{"iterms"}
+  \item{terms}{if \code{type=="terms"} or \code{"iterms"}
   then only results for the terms given in this array will
   be returned. Note that these are the term-labels used in
   the gam-fit, not those in the original \code{pffr}-model

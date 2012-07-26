@@ -27,20 +27,13 @@ matrix of linear constraints.}
 maximum smoothing parameter value to consider (when \code{lamvec=NULL}). 
 }
 }
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
 if \code{lamvec=NULL}, a list (returned by \code{optimize}) with elements \code{minimum} and \code{objective} giving, respectively, the chosen smoothing parameter and the associated cross-validation score.  Otherwise a 2-column table with the candidate smoothing parameters in the first column and the corresponding cross-validation scores in the second.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
+
 \author{
 Philip Reiss \email{phil.reiss@nyumc.org}
-}
-\note{
-%%  ~~further notes~~
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -48,10 +41,5 @@ Philip Reiss \email{phil.reiss@nyumc.org}
 \seealso{
 \code{\link{fosr}}, \code{\link{pwcv}}
 }
-\examples{
-}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{models}
-\keyword{regression}
-\keyword{smooth}

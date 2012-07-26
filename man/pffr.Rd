@@ -2,8 +2,9 @@
 \alias{pffr}
 \title{Penalized function-on-function regression}
 \usage{
-  pffr(formula, yind, fitter = NA, method = "REML",
-  bsy.default = list(bs = "ps", m = c(2, 1)), ...)
+pffr(formula, yind, fitter = NA, method = "REML", tensortype = c("te", "t2"), 
+     bs.yindex = list(bs = "ps", k = 5, m = c(2, 1)), 
+     bs.int = list(bs = "ps", k = 20, m = c(2, 1)), ...)
 }
 \arguments{
   \item{formula}{a formula with special terms as for
@@ -24,16 +25,25 @@
   (see \code{\link[mgcv]{gamm}}) and "gamm4" (see
   \code{\link[gamm4]{gamm4}}) are valid options as well.}
 
-  \item{method}{Defaults to \code{"REML"}-estimation,
+  \item{method}{defaults to \code{"REML"}-estimation,
   including of unknown scale. See \code{\link[mgcv]{gam}}
   for details.}
 
-  \item{bsy.default}{a named (!) list giving the parameters
+  \item{bs.yindex}{a named (!) list giving the parameters
   for spline bases on the index of the functional response.
-  Defaults to \code{list(bs="ps", m=c(2, 1))}, i.e. a cubic
-  B-spline basis with first order difference penalty. Only
-  arguments \code{bs, k, m} are used, see
-  \code{\link[mgcv]{s}} for details.}
+  Defaults to \code{list(bs="ps", k=5, m=c(2, 1))}, i.e. 5
+  cubic B-splines bases with first order difference
+  penalty.}
+
+  \item{bs.int}{a named (!) list giving the parameters for
+  the spline basis for the global functional intercept.
+  Defaults to \code{list(bs="ps", k=20, m=c(2, 1))}, i.e.
+  20 cubic B-splines bases with first order difference
+  penalty.}
+
+  \item{tensortype}{which typ of tenor product splines to
+  use. One of "\code{\link[mgcv]{te}}" or
+  "\code{\link[mgcv]{t2}}", defaults to \code{te}}
 
   \item{...}{additional arguments that are valid for
   \code{\link[mgcv]{gam}} or \code{\link[mgcv]{bam}}.
@@ -81,15 +91,30 @@
   Internally, univariate smooth terms without a
   \code{c()}-wrapper are expanded into bivariate smooth
   terms in the original covariate and the index of the
-  functional response.  Bivariate smooth terms (\code{s(),
+  functional response. Bivariate smooth terms (\code{s(),
   te()} or \code{t2()}) without a \code{c()}-wrapper are
   expanded into trivariate smooth terms in the original
   covariates and the index of the functional response.
   Linear terms for scalar covariates or categorical
   covariates are expanded into varying coefficient terms,
   varying smoothly over the index of the functional
-  response.\cr Use \code{~-1 + c(1) + ...} to specify a
-  model with a constant instead of a functional intercept.
+  response. For factor variables, a separate smooth
+  function with its own smoothing parameter is estimated
+  for each level of the factor.\cr Functional random
+  intercepts \eqn{B_{0g(i)}(t)} for a grouping variable
+  \code{g} can be specified via \code{~s(g, bs="re")}),
+  functional random slopes \eqn{u_i B_{1g(i)}(t)} in a
+  numeric variable \code{u} via \code{~s(g, u,
+  bs="re")}).\cr The marginal spline basis used for the
+  index of the the functional response is specified via the
+  global argument \code{bs.yindex}. If necessary, this can
+  be overriden for any term by supplying a
+  \code{bs.yindex}-argument, e.g. \code{~s(x,
+  bs.yindex=list(bs="tp", k=7)} would yield a tensor
+  product spline for which the marginal basis for the index
+  of the response are 7 cubic thin-plate spline
+  functions.\cr Use \code{~-1 + c(1) + ...} to specify a
+  model with only a constant and no functional intercept.
   \cr
 
   The functional response and functional covariates have to
@@ -104,76 +129,21 @@
   of observations times number of evaluations of \eqn{Y(t)}
   per observation.\cr
 
-  Note that only default identifiability constraints as
-  implemented in \code{\link[mgcv]{gam.side}} are used,
-  i.e. \cr \eqn{\sum_{i,t} \hat f(z_i, t) = 0}. (\code{\link[mgcv]{gam.side}}
-  may impose other identifiability constraints as
-  well but doesn't give interpretable results.) These may
-  not be well suited for models with multiple functional
-  effects varying across \eqn{t}.\cr Centering estimated
-  effects \eqn{\hat f(z_i, t)} (\code{~s(z)}) across
-  observations so that \eqn{\sum_i \hat f(z_i, t) = 0} for
-  all \eqn{t}, i.e., transforming \eqn{\hat f(z_i, t)
-  \rightarrow \hat f(z_i, t) - n^{-1} \sum_i \hat f(z_i,
-  t)} and adding the mean function \eqn{n^{-1} \sum_i \hat
-  f(z_i, t)} to the global functional intercept can improve
-  the interpretability of results. We also recommend using
+  Note that pffr overrides the default identifiability
+  constraints (\eqn{\sum_{i,t} \hat f(z_i, x_i, t) = 0})
+  implemented in \code{mgcv} for tensor product terms whose
+  marginal terms include the index of the functional
+  response \eqn{t}.  Instead, \eqn{\sum_i \hat f(z_i, x_i,
+  t) = 0} for all \eqn{t} is enforced, so that effects
+  varying over \eqn{t} can be interpreted as deviations
+  from the global functional intercept. I recommend using
   centered scalar covariates for terms like \eqn{z
   \beta(t)} (\code{~z}) and centered functional covariates
   with \eqn{\sum_i X_i(t) = 0} for all \eqn{t} in
-  \code{ff}-terms.
+  \code{ff}-terms so that the global functional intercept
+  can be interpreted as the global mean function.
 }
 \author{
   Fabian Scheipl, Sonja Greven
-}
-\references{
-Ivanescu, A. E., Staicu, A.-M., Greven, S., Scheipl, F., and Crainiceanu, C. M. (2011).  Penalized function-on-function regression.  Submitted.
-}
-\examples{
-
-
-data(DTI, package="refund")
-DTI$case <- factor(DTI$case)
-DTI$ID <- factor(DTI$ID)
-DTI$visit <- factor(DTI$visit)
-rcst.complete <- apply(DTI, 1, function(x) !any(is.na(x)))
-DTIcomplete <- DTI[rcst.complete,]
-
-## split into test and training data
-set.seed(2213213)
-trainind <- sort(sample(1:sum(rcst.complete), 150))
-train <- DTIcomplete[trainind,]
-test <-  DTIcomplete[-trainind,]
-# drop subjects not in the train data
-test <- test[test$ID \%in\% unique(train$ID),]
-
-rcstind <- 1:55
-# constant random intercepts for ID,
-# smooth effect of pasat varying over index of rcst
-# constant effect of visit
-# m1 adds a functional effect for cca
-summary(m0 <- pffr(rcst ~ c(s(ID, bs="re")) + s(pasat) + c(visit),
-                yind=rcstind, data=train))
-summary(m1 <- pffr(rcst ~ c(s(ID, bs="re")) + s(pasat) +
-                c(visit) + ff(cca, yind=rcstind),
-                yind=rcstind, data=train))
-AIC(m0, m1)
-plot(m1, pers=TRUE, pages=1, ticktype="detailed")
-str(coefs.m1 <- coef(m1))
-
-#get predicted trajectories for test data
-pr.m0 <- predict(m0, newdata=test)
-pr.m1 <- predict(m1, newdata=test)
-# (riemann integrated) squared prediction error:
-(IMSE <- c(m0 = sum((pr.m0-test$rcst)^2),
-                    m1 = sum((pr.m1-test$rcst)^2)))
-layout(t(1:3))
-matplot(t(test$rcst), type="l", lty=1, col=rgb(0,0,0,.1), main="observed rcst",
-          ylim=range(test$rcst, pr.m0, pr.m1))
-matplot(t(pr.m0),type="l", lty=1, col=rgb(0,0,0,.1), main="predicted: m0",
-          ylim=range(test$rcst, pr.m0, pr.m1))
-matplot(t(pr.m1),type="l", lty=1, col=rgb(0,0,0,.1), main="predicted: m1",
-          ylim=range(test$rcst, pr.m0, pr.m1))
-
 }
 
