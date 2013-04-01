@@ -5,14 +5,13 @@ reconstr2d <- function(decomp2dobj){
 	} else if (ctmp != 'decomp2d'){
 	    stop('decomp2dobj is not of class decomp2d')
 	}
-	require("wavethresh")
     rowNum <- decomp2dobj$rowNum
     min.scale <- decomp2dobj$callInfo$min.scale
     filter.number <- decomp2dobj$callInfo$filter$filter.number
     family <- decomp2dobj$callInfo$filter$family
     type <- decomp2dobj$callInfo$type
     bc <- decomp2dobj$callInfo$bc
-    wdobj <- imwd_test(array(0, dim = c(rowNum, rowNum)), filter.number = filter.number, family = family, type = type, bc = bc)
+    wdobj <- imwd(array(0, dim = c(rowNum, rowNum)), filter.number = filter.number, family = family, type = type, bc = bc)
 
     # coefficient D
     # listIdx - iterator through the coefficients list of w
@@ -38,7 +37,7 @@ reconstr2d <- function(decomp2dobj){
         wdobj[[6+listIdx]] <- decomp2dobj$coef[arrIdx]
     } else{
         smooth <- matrix(wdobj[[7+(wdobj$nlevels-min.scale-1)*4]],nrow=2^ min.scale)
-        smoothW <- imwd_test(smooth, family = family, filter.number = filter.number,
+        smoothW <- imwd(smooth, family = family, filter.number = filter.number,
                              type = type, bc = bc)
         tail <- length(wdobj)
         for (smoothIdx in length(smoothW) : 7){
