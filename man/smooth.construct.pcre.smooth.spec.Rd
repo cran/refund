@@ -2,7 +2,8 @@
 \alias{smooth.construct.pcre.smooth.spec}
 \title{mgcv-style constructor for PC-basis functional random effects}
 \usage{
-  \method{smooth.construct}{pcre.smooth.spec} (object, data, knots)
+  \method{smooth.construct}{pcre.smooth.spec} (object,
+    data, knots)
 }
 \arguments{
   \item{object}{a smooth specification object, see
@@ -25,5 +26,9 @@
   more details on \code{mgcv}-style smoother specification
   and \code{\link{pcre}} for the corresponding
   \code{pffr()}-formula wrapper.
+}
+\author{
+  Fabian Scheipl; adapted from 're' constructor by S.N.
+  Wood.
 }
 

@@ -1,4 +1,4 @@
-# Export all names
+# Export all functions
 exportPattern(".")
 
 # Import all packages listed as Imports or Depends
@@ -12,5 +12,10 @@ import(
   nlme,
   wavethresh,
   Matrix,
-  gamm4
+  gamm4,
+  matrixStats,
+  lme4,
+  splines,
+  RLRsim,
+  lattice
 )
