@@ -93,6 +93,7 @@
 #' summary(m1)
 #' plot(m1, pers=TRUE)
 #' 
+#' \dontrun{
 #' ###############################################################################
 #' # multivariate model: 
 #' # Y(t) = f0(t)  + \int X1(s)\beta1(s,t)ds + \int X2(s)\beta2(s,t)ds +
@@ -109,6 +110,7 @@
 #'         data=data2)
 #' summary(m2)
 #' plot(m2, pers=TRUE)
+#' } 
 pffr <- function(
 		formula,
 		yind,
@@ -324,9 +326,12 @@ pffr <- function(
         newtrmstrings[where.pcre] <- sapply(pcreterms, function(x) {
                     safeDeparse(x$call)
                 })
-        
-        pcereterms <- lapply(pcreterms, function(x) x[names(x)!="data"])
-    }else pcreterms <- NULL
+     
+        for(i in seq_along(pcreterms)) {
+            pcreterms[[i]] <- pcreterms[[i]][-1]
+        }
+     }else pcreterms <- NULL
+    
     
     #transform: s(x, ...), te(x, z,...), t2(x, z, ...) --> <te|t2>(x, <z,> yindex, ..., <bs.yindex>)
     makeSTeT2 <- function(x){
@@ -692,10 +697,12 @@ pffr <- function(
                     where.s=where.s,
                     where.te= where.te,
                     where.t2=where.t2,
+                    where.pcre=where.pcre,
                     where.par=where.par
             ),
             ff=ffterms,
             ffpc=ffpcterms,
+            pcreterms=pcreterms,
             missingind = missingind)
     
     if(as.character(algorithm) %in% c("gamm4","gamm")){

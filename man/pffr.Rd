@@ -56,7 +56,7 @@
   20 cubic B-splines bases with first order difference
   penalty.}
 
-  \item{tensortype}{which type of tenor product splines to
+  \item{tensortype}{which typ of tenor product splines to
   use. One of "\code{\link[mgcv]{te}}" or
   "\code{\link[mgcv]{t2}}", defaults to \code{te}}
 
@@ -161,7 +161,6 @@
   can be interpreted as the global mean function.
 }
 \examples{
-
 \dontrun{
 ###############################################################################
 # univariate model:
