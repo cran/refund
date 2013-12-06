@@ -2,6 +2,9 @@ wcr <- function(y, xfuncs, min.scale, nfeatures, ncomp, method = c("pcr", "pls")
                 mean.signal.term = FALSE, covt = NULL, filter.number = 10, 
                 wavelet.family = "DaubLeAsymm", family = "gaussian", cv1 = FALSE, 
                 nfold = 5, nsplit = 1, store.cv = FALSE, store.glm = FALSE, seed = NULL) {
+    if (!is.null(covt)){
+    	covt <- as.matrix(covt)
+    }
     checkError(y = y, xfuncs = xfuncs, covt = covt, 
                vars = list(min.scale = min.scale, nfeatures = nfeatures, ncomp = ncomp))    
     method <- match.arg(method)
@@ -122,7 +125,7 @@ wcr <- function(y, xfuncs, min.scale, nfeatures, ncomp, method = c("pcr", "pls")
 	                            phat <- exp(yhat) / (1 + exp(yhat))
 	                            phat <- replace(phat, exp(yhat) == Inf, 1)
 	                            cv.table[isplit, ifold, ims, infeatures, icomp] <- 
-	                                 - sum(log(phat)[y[idxTest] == 1]) - sum(log((1-phat))[y[idxTest] == 0])
+	                                 (- sum(log(phat)[y[idxTest] == 1]) - sum(log((1-phat))[y[idxTest] == 0])) / length(y[idxTest])
 	                        }
 	                    }
 	                } # ncomp

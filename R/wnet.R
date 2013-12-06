@@ -2,6 +2,9 @@ wnet <- function(y, xfuncs, covt = NULL, min.scale = 0, nfeatures = NULL, alpha 
                  lambda = NULL, standardize = FALSE, pen.covt = FALSE, filter.number = 10, 
                  wavelet.family = 'DaubLeAsymm', family = 'gaussian', nfold = 5, 
                  nsplit = 1, store.cv = FALSE, store.glmnet = FALSE, seed = NULL, ...){
+    if (!is.null(covt)){
+    	covt <- as.matrix(covt)
+    }
     checkError(y = y, xfuncs = xfuncs, covt = covt, 
                vars = list(min.scale = min.scale, nfeatures = nfeatures, alpha = alpha))    
     n <- length(y)
@@ -107,8 +110,8 @@ wnet <- function(y, xfuncs, covt = NULL, min.scale = 0, nfeatures = NULL, alpha 
 	            			    cv.table[isplit, ifold, ims, infeatures, ialpha,] <- colMeans((y[idxTest] - yhat)^2)
 	            		    } else if (family == 'binomial'){
 	                            cv.table[isplit, ifold, ims,infeatures, ialpha, ] <- 
-	                                            - apply(as.matrix(log(yhat)[y[idxTest] == 1,]), 2, sum) - 
-	                                              apply(as.matrix(log((1-yhat))[y[idxTest] == 0, ]), 2, sum)
+	                                            (- apply(as.matrix(log(yhat)[y[idxTest] == 1,]), 2, sum) - 
+	                                              apply(as.matrix(log((1-yhat))[y[idxTest] == 0, ]), 2, sum)) / length(y[idxTest])
 	            		    }  
 	            		} else {
 	            			theta.w <- predict(obje, s = lambda.table[ims, infeatures, ialpha, ], type = 'coefficients')

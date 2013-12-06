@@ -1,8 +1,8 @@
 Package: refund
 Type: Package
-Title: refund: Regression with Functional Data
-Version: 0.1-8
-Date: 2013-07-15
+Title: Regression with Functional Data
+Version: 0.1-9
+Date: 2013-12-06
 Authors@R: c(person("Ciprian Crainiceanu", role = "aut", email =
     "ccrainic@jhsph.edu"), person("Philip Reiss", role = "aut", email =
     "phil.reiss@nyumc.org"), person("Jeff Goldsmith", role = "aut", email =
@@ -14,12 +14,14 @@ Authors@R: c(person("Ciprian Crainiceanu", role = "aut", email =
     person("Jaroslaw Harezlak", role="ctb"), person("Madan Gopal Kundu",
     role="ctb"), person("Yihong Zhao", role="ctb"), person("Matt McLean",
     role="ctb"), person("Luo Xiao", role="ctb", email = "lxiao@jhsph.edu"))
-Depends: R (>= 2.14.0)
-Imports: lattice, boot, mgcv, fda, MASS, glmnet, magic, nlme,
-        wavethresh, Matrix, gamm4, matrixStats, lme4, splines, RLRsim
-Description: Methods for regression for functional
-    data, including function-on-scalar, scalar-on-function, and
-    function-on-function regression. Some of the functions are applicable to    image data.
+Depends: R (>= 2.14.0),
+Imports: lattice, boot, mgcv (>= 1.7-27), fda, MASS, glmnet, magic,
+        nlme, wavethresh, Matrix, gamm4, matrixStats, lme4, splines,
+        RLRsim
+Description: Methods for regression for functional data, 
+			 including function-on-scalar, scalar-on-function, 
+			 and function-on-function regression. Some of the 
+			 functions are applicable to image data.
 License: GPL (>= 2)
 LazyLoad: yes
 Repository: CRAN
@@ -37,7 +39,7 @@ Collate: 'Omegas.R' 'af.R' 'amc.R' 'ccb.fpc.R' 'decomp.R' 'decomp2d.R'
         'vis.fgam.R' 'wcr.R' 'wcr.perm.R' 'wnet.R' 'wnet.perm.R'
         'parse.predict.pfr.R' 'postprocess.pfr.R' 'predict.pfr.R'
         'preprocess.pfr.R' 'wUtil.R' 'plot.wnet-and-plot.wcr.R'
-Packaged: 2013-07-18 17:53:45 UTC; Rayman
+Packaged: 2013-12-06 17:48:17 UTC; Rayman
 Author: Ciprian Crainiceanu [aut],
   Philip Reiss [aut],
   Jeff Goldsmith [aut],
@@ -53,4 +55,4 @@ Author: Ciprian Crainiceanu [aut],
   Luo Xiao [ctb]
 Maintainer: Lei Huang <huangracer@gmail.com>
 NeedsCompilation: no
-Date/Publication: 2013-07-18 22:29:05
+Date/Publication: 2013-12-06 21:10:57

@@ -55,9 +55,10 @@ coefboot.pffr <- function(object,
     
     ## refit models on bootstrap data sets & save fits
     cat("starting bootstrap ")
-    # check whether this is already a child process, and
-    # switch of parallelization if yes
-    if(parallel:::isChild()) parallel <- "no"
+    ## this no longer passes CRAN CHECK:
+    ## check whether this is already a child process, and
+    ## switch of parallelization if yes
+    # if(parallel:::isChild()) parallel <- "no"
     
     # resample Y
 #    bootfct.resample <- function(modcall, data, indices) {
@@ -664,8 +665,8 @@ pffrGLS <- function(
     # diagonal structure of the t2-penalties)
     if(!(as.character(algorithm) %in% c("gamm4"))){
         suppressMessages(
-                trace(mgcv:::smooth.construct.tensor.smooth.spec, 
-                        at = max(which(sapply(as.list(body(mgcv:::smooth.construct.tensor.smooth.spec)), function(x) any(grepl(x, pattern="object$C", fixed=TRUE))))) + 1, 
+                trace(mgcv::smooth.construct.tensor.smooth.spec, 
+                        at = max(which(sapply(as.list(body(mgcv::smooth.construct.tensor.smooth.spec)), function(x) any(grepl(x, pattern="object$C", fixed=TRUE))))) + 1, 
                         print=FALSE,
                         tracer = quote({
                                     #browser()
@@ -693,8 +694,8 @@ pffrGLS <- function(
         )
         
         suppressMessages(
-                trace(mgcv:::smooth.construct.t2.smooth.spec, 
-                        at = max(which(sapply(as.list(body(mgcv:::smooth.construct.t2.smooth.spec)), function(x) any(grepl(x, pattern="object$Cp", fixed=TRUE))))) + 1, 
+                trace(mgcv::smooth.construct.t2.smooth.spec, 
+                        at = max(which(sapply(as.list(body(mgcv::smooth.construct.t2.smooth.spec)), function(x) any(grepl(x, pattern="object$Cp", fixed=TRUE))))) + 1, 
                         print=FALSE,
                         tracer = quote({
                                     if(!is.null(object$margin[[length(object$margin)]]$xt$impose.ffregC) &&
@@ -722,8 +723,8 @@ pffrGLS <- function(
         
         
         on.exit({
-                    suppressMessages(try(untrace(mgcv:::smooth.construct.tensor.smooth.spec), silent = TRUE))
-                    suppressMessages(try(untrace(mgcv:::smooth.construct.t2.smooth.spec), silent = TRUE))
+                    suppressMessages(try(untrace(mgcv::smooth.construct.tensor.smooth.spec), silent = TRUE))
+                    suppressMessages(try(untrace(mgcv::smooth.construct.t2.smooth.spec), silent = TRUE))
                 })
     }
     
