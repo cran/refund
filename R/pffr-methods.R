@@ -17,7 +17,8 @@
 #'  from the fitted model object and cannot be supplied with \code{newdata}.  
 #'  Prediction is always for the entire index range of the responses as defined
 #'  in the original fit. If the original fit was performed on sparse or irregular, 
-#'  non-gridded response data and no \code{newdata} was supplied, this function will
+#'  non-gridded response data supplied via \code{pffr}'s \code{ydata}-argument
+#'  and no \code{newdata} was supplied, this function will
 #'  simply return fitted values for the original evaluation points of the response (in list form).
 #'  If the original fit was performed on sparse or irregular data and \code{newdata} \emph{was}
 #'  supplied, the function will return predictions on the grid of evaluation points given in
@@ -30,7 +31,8 @@
 #' are returned. If \code{newdata} is provided then it must contain all the variables needed
 #' for prediction, in the format supplied to \code{pffr}, i.e., functional predictors must be
 #'  supplied as matrices with each row corresponding to one observed function. 
-#'  See Details for more on index variables and irregular data.
+#'  See Details for more on index variables and prediction for models fit on 
+#'  irregular or sparse data.
 #' @param reformat logical, defaults to TRUE. Should predictions be returned in matrix form (default) or 
 #' in the long vector shape returned by \code{predict.gam()}? 
 #' @param type see \code{\link[mgcv]{predict.gam}()} for details. 
@@ -92,17 +94,17 @@ predict.pffr <- function(object,
             varmap <- sapply(names(object$pffr$labelmap), function(x) all.vars(formula(paste("~", x))))
             
             # don't include response
-            covnames <- names(newdata)[names(newdata)!=deparse(object$formula[[2]])]
+            covnames <- unique(names(newdata)[names(newdata)!=deparse(object$formula[[2]])])
             for(cov in covnames){
                 #find the term(s) <cov> is associated with
                 trms <- which(sapply(varmap, function(x) any(grep(paste("^",cov,"$",sep=""), x)))) 
                 if(!is.null(dots$terms)) trms <- trms[names(trms) %in% dots$terms]
                 if(length(trms)!=0){
                     for(trm in trms){
-                        is.ff <- trm %in% object$pffr$where$where.ff
-                        is.sff <- trm %in% object$pffr$where$where.sff
-                        is.ffpc <- trm %in% object$pffr$where$where.ffpc
-                        is.pcre <- trm %in% object$pffr$where$where.pcre
+                        is.ff <- trm %in% object$pffr$where$ff
+                        is.sff <- trm %in% object$pffr$where$sff
+                        is.ffpc <- trm %in% object$pffr$where$ffpc
+                        is.pcre <- trm %in% object$pffr$where$pcre
                         #if ff(X) or sff(X), generate (X.mat), X.tmat, X.smat, L.X ...
                         if(is.ff){
                             ff <- object$pffr$ff[[grep(paste(cov,"[,\\)]",sep=""), names(object$pffr$ff))]]
@@ -455,8 +457,8 @@ coef.pffr <- function(object, raw=FALSE, se=TRUE, freq=FALSE, sandwich=FALSE,
             
             makeDataGrid <- function(trm){
                 #generate grid of values in range of original data
-                if(trm$dim==1){
-                    x <- get.var(trm$term, object$model)
+                x <- get.var(trm$term[1], object$model)
+                if(trm$dim==1) {
                     xg <- if(is.factor(x)) {
                         unique(x)
                     } else seq(min(x), max(x), length=n1)
@@ -464,37 +466,63 @@ coef.pffr <- function(object, raw=FALSE, se=TRUE, freq=FALSE, sandwich=FALSE,
                     colnames(d) <- trm$term
                     attr(d, "xm") <- xg
                 }
-                if(trm$dim > 1){
-                    
-                    ng <- ifelse(trm$dim==2, n2, n3) 
-                    
-                    varnms <- trm$term
-                    
-                    x <- get.var(trm$term[1], object$model)
+                if(is.pcre) {
+                    ng <- n2
                     xg <- if(is.factor(x)) {
                         unique(x)
                     } else seq(min(x), max(x),length=ng)
-                    y <- get.var(trm$term[2], object$model)
-                    yg <- if(is.factor(y)) {
-                        unique(y)
-                    } else seq(min(y), max(y),length=ng)
-                    if(length(varnms)==2){
-                        d <- expand.grid(xg, yg)
-                        attr(d, "xm") <- xg
-                        attr(d, "ym") <- yg    
-                    } else {
-                        z <- get.var(trm$term[3], object$model)
-                        zg <- if(is.factor(z)) {
-                            unique(z)
-                        } else seq(min(z), max(z), length=ng)
-                        d <- expand.grid(xg, yg, zg)
-                        attr(d, "xm") <- xg
-                        attr(d, "ym") <- yg
-                        attr(d, "zm") <- zg
-                    }
-                    colnames(d) <- varnms 
                     
-                }
+                    which.pcre <- which(sapply(object$pffr$pcreterms, `[[`, "idname") 
+                                        == trm$term[1])
+                    pcreterm <- object$pffr$pcreterms[[which.pcre]] 
+                    
+                    yg <- seq(min(pcreterm$yind), max(pcreterm$yind), l=ng)
+                    
+                    # interpolate given eigenfunctions to grid values:
+                    efcts.grid <- sapply(colnames(pcreterm$efunctions), 
+                                         function(nm){
+                                             approx(x=pcreterm$yind, 
+                                                    y=pcreterm$efunctions[, nm], 
+                                                    xout=yg,
+                                                    method = "linear")$y
+                                         })
+                    d <- cbind(expand.grid(xg, yg), 
+                               efcts.grid[rep(1:ng, e=length(xg)),])
+                    colnames(d)[1:2] <- c(trm$term[1], 
+                                          paste0(object$pffr$yindname, ".vec"))
+                    attr(d, "xm") <- xg
+                    attr(d, "ym") <- yg   
+                } else {
+                    if(trm$dim > 1) {
+                        ng <- ifelse(trm$dim==2, n2, n3) 
+                        
+                        varnms <- trm$term
+                        
+                        x <- get.var(trm$term[1], object$model)
+                        xg <- if(is.factor(x)) {
+                            unique(x)
+                        } else seq(min(x), max(x),length=ng)
+                        y <- get.var(trm$term[2], object$model)
+                        yg <- if(is.factor(y)) {
+                            unique(y)
+                        } else seq(min(y), max(y),length=ng)
+                        if(length(varnms)==2){
+                            d <- expand.grid(xg, yg)
+                            attr(d, "xm") <- xg
+                            attr(d, "ym") <- yg    
+                        } else {
+                            z <- get.var(trm$term[3], object$model)
+                            zg <- if(is.factor(z)) {
+                                unique(z)
+                            } else seq(min(z), max(z), length=ng)
+                            d <- expand.grid(xg, yg, zg)
+                            attr(d, "xm") <- xg
+                            attr(d, "ym") <- yg
+                            attr(d, "zm") <- zg
+                        }
+                        colnames(d) <- varnms 
+                    }
+                } 
                 if(trm$by!="NA"){
                     d$by <- 1
                     colnames(d) <- c(head(colnames(d),-1), trm$by)
@@ -505,18 +533,26 @@ coef.pffr <- function(object, raw=FALSE, se=TRUE, freq=FALSE, sandwich=FALSE,
             getP <- function(trm, d){
                 #return an object similar to what plot.mgcv.smooth etc. return 
                 X <- PredictMat(trm, d)
+                
+                if(is.pcre){
+                    #sloppy, buit effective: temporarily overwrite offending entries
+                    trm$dim <- 2
+                    trm$term[2] <- paste0(object$pffr$yindname, ".vec")
+                }
+                
                 P <- if(trm$dim==1){
                     list(x=attr(d, "xm"), xlab=trm$term, xlim=safeRange(attr(d, "xm")))
                 } else {
                     varnms <-  trm$term
-                    if(length(varnms) == 2){
+                    if(trm$dim==2){
                         list(x=attr(d, "xm"), y=attr(d, "ym"), xlab=varnms[1], ylab=varnms[2],
                              ylim=safeRange(attr(d, "ym")), xlim=safeRange(attr(d, "xm")))
                     } else {
                         if(trm$dim==3){
                             list(x=attr(d, "xm"), y=attr(d, "ym"), z=attr(d, "zm"), 
                                  xlab=varnms[1], ylab=varnms[2], zlab=varnms[3],
-                                 ylim=safeRange(attr(d, "ym")), xlim=safeRange(attr(d, "xm")), zlim=safeRange(attr(d, "zm")))
+                                 ylim=safeRange(attr(d, "ym")), xlim=safeRange(attr(d, "xm")), 
+                                 zlim=safeRange(attr(d, "zm")))
                         }
                     }
                 }
@@ -543,7 +579,10 @@ coef.pffr <- function(object, raw=FALSE, se=TRUE, freq=FALSE, sandwich=FALSE,
             }
             
             trm <- object$smooth[[i]]
-            if(trm$dim > 3){
+            is.pcre <- "pcre.random.effect" %in% class(trm)
+            
+            #FIXME: this fails for pcre-terms with >2 FPCs...!
+            if(trm$dim > 3 && !is.pcre){
                 warning("can't deal with smooths with more than 3 dimensions, returning NULL for ", 
                         shrtlbls[names(object$smooth)[i] == unlist(object$pffr$labelmap)])
                 return(NULL)
@@ -556,15 +595,15 @@ coef.pffr <- function(object, raw=FALSE, se=TRUE, freq=FALSE, sandwich=FALSE,
             # get proper labeling
             P$main <- shrtlbls[names(object$smooth)[i] == unlist(object$pffr$labelmap)]  
             which <- match(names(object$smooth)[i], object$pffr$labelmap)
-            if(which %in% object$pffr$where$where.ff){
-                which.ff <- which(object$pffr$where$where.ff == which)
+            if(which %in% object$pffr$where$ff){
+                which.ff <- which(object$pffr$where$ff == which)
                 P$ylab <- object$pffr$yindname
                 xlab <- deparse(as.call(formula(paste("~",names(object$pffr$ff)[which.ff]))[[2]])$xind)
                 if(xlab=="NULL") xlab <- "xindex"
                 P$xlab <- xlab
             }
-            if(which %in% object$pffr$where$where.sff){
-                which.sff <- which(object$pffr$where$where.sff == which)
+            if(which %in% object$pffr$where$sff){
+                which.sff <- which(object$pffr$where$sff == which)
                 P$ylab <- object$pffr$yindname
                 xlab <- deparse(as.call(formula(paste("~",names(object$pffr$ff)[which.sff]))[[2]])$xind)
                 if(xlab=="NULL") xlab <- "xindex"

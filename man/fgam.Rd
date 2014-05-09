@@ -102,4 +102,3 @@ plot(fit)
 vis.fgam(fit,af.term='X_2',plot.type='contour')
 }
 }
-
