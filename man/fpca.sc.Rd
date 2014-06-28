@@ -98,11 +98,11 @@ plot(d, Fit.MM$efunctions[,1], type = 'l', xlab = "Months since seroconversion",
   
   
 # input a dataframe instead of a matrix
-library(ggplot2)
+
 nid <- 20
 nobs <- sample(10:20, nid, rep=TRUE)
 ydata <- data.frame(
-    .id = rep(1:nid, nobs),
+    .id = rep(1:nid, nobs),	
     .index = round(runif(sum(nobs), 0, 1), 3))
 ydata$.value <- unlist(tapply(ydata$.index, 
                               ydata$.id, 
@@ -111,9 +111,7 @@ ydata$.value <- unlist(tapply(ydata$.index,
                                   dbeta(x, runif(1, 6, 8), runif(1, 3, 5))
                               )
                        )
-ggplot(ydata,aes(x=.index, y=.value)) + 
-    geom_line() + geom_point() + facet_wrap(~.id)
-	
 Fit.MM = fpca.sc(ydata=ydata, var = TRUE, simul = FALSE)
-matplot(efunctions[,1:4])
-}}
+matplot(Fit.MM$efunctions[,1:2])
+}
+}

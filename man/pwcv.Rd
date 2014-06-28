@@ -51,7 +51,6 @@ Philip Reiss \email{phil.reiss@nyumc.org}}
 \code{\link{fosr}}, \code{\link{lofocv}}
 }
 \examples{
-\dontrun{
 require(fda)
 # Canadian weather example from Reiss et al. (2010).
 # The first two lines are taken from the fRegress.CV help file (package fda)
@@ -85,5 +84,4 @@ legend(250, 40, c('Region', 'Latitude'), lty=1:2)
 box()
 axis(2)
 axisIntervals(1)
-}
 }
