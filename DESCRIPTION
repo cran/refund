@@ -1,49 +1,71 @@
 Package: refund
 Type: Package
 Title: Regression with Functional Data
-Version: 0.1-11
-Date: 2014-06-28
-Authors@R: c(person("Ciprian Crainiceanu", role = "aut", email =
-    "ccrainic@jhsph.edu"), person("Philip Reiss", role = "aut", email =
-    "phil.reiss@nyumc.org"), person("Jeff Goldsmith", role = "aut", email =
-    "jeff.goldsmith@columbia.edu"), person("Lei Huang", role = c("aut","cre"),
-    email = "huangracer@gmail.com"), person("Lan Huo", role = "aut", email =
-    "lan.huo@nyumc.org"), person("Fabian Scheipl", role = "aut", email =
-    "fabian.scheipl@stat.uni-muenchen.de"), person("Bruce Swihart", role =
-    "ctb", email = "bswihart@jhsph.edu"), person("Sonja Greven", role = "ctb"),
-    person("Jaroslaw Harezlak", role="ctb"), person("Madan Gopal Kundu",
-    role="ctb"), person("Yihong Zhao", role="ctb"), person("Matt McLean",
-    role="ctb"), person("Luo Xiao", role="ctb", email = "lxiao@jhsph.edu"))
-Author: Ciprian Crainiceanu [aut], Philip Reiss [aut], Jeff Goldsmith [aut],
-    Lei Huang [aut, cre], Lan Huo [aut], Fabian Scheipl [aut], Bruce Swihart
-    [ctb], Sonja Greven [ctb], Jaroslaw Harezlak [ctb], Madan Gopal Kundu
-    [ctb], Yihong Zhao [ctb], Matt McLean [ctb], Luo Xiao [ctb]
-Maintainer: Lei Huang <huangracer@gmail.com>
-Depends: R (>= 2.14.0), fda,
-Imports: lattice, boot, mgcv (>= 1.7-28), MASS, glmnet, magic, nlme,
-        wavethresh, Matrix, gamm4, matrixStats, lme4, splines, RLRsim
+Version: 0.1-12
+Date: 2015-08-02
+Authors@R: c(person("Lei", "Huang", role = c("aut","cre"), email = "huangracer@gmail.com"), 
+    person("Fabian", "Scheipl", role = "aut", email = "fabian.scheipl@stat.uni-muenchen.de"), 
+    person("Jeff", "Goldsmith", role = "aut", email = "jeff.goldsmith@columbia.edu"), 
+    person("Jonathan", "Gellar", role="aut",email="jgellar1@jhu.edu"), 
+    person("Jaroslaw", "Harezlak", role="aut"), 
+    person(c("Mathew", "W."), "McLean", role="aut", email = "mathew.w.mclean@gmail.com"),
+    person("Bruce", "Swihart", role ="aut", email = "bswihart@jhsph.edu"),
+    person("Luo", "Xiao", role="aut", email = "lxiao@jhsph.edu"),
+    person("Ciprian", "Crainiceanu", role = "aut", email = "ccrainic@jhsph.edu"), 
+    person("Philip", "Reiss", role = "aut", email = "phil.reiss@nyumc.org"), 
+    person("Yakuan", "Chen", role="ctb", email = "yc2641@@cumc.columbia.edu"),
+    person("Sonja", "Greven", role = "ctb"),
+    person("Lan", "Huo", role = "ctb", email = "lan.huo@nyumc.org"), 
+    person(c("Madan", "Gopal"), "Kundu", role="ctb"))
+Depends: R (>= 2.14.0)
+Imports: fda, Matrix, lattice, boot, mgcv (>= 1.8-4), MASS, magic,
+        nlme, gamm4, lme4, RLRsim, splines, grpreg, ggplot2, stats,
+        MCMCpack, pbs, methods
+Suggests: RColorBrewer, reshape2
 Description: Methods for regression for functional
     data, including function-on-scalar, scalar-on-function, and
     function-on-function regression. Some of the functions are applicable to
     image data.
 License: GPL (>= 2)
 LazyLoad: yes
+LazyData: true
 Repository: CRAN
-Collate: 'Omegas.R' 'af.R' 'amc.R' 'ccb.fpc.R' 'decomp.R' 'decomp2d.R'
-        'decomp3d.R' 'fbps.R' 'fgam.R' 'fosr.R' 'fosr.perm.R'
-        'fosr.perm.fit.R' 'fosr.perm.test.R' 'fosr2s.R' 'fpca.sc.R'
-        'fpca.face.R' 'fpcr.R' 'fpcr.setup.R' 'lf.R' 'lofocv.R'
-        'lpeer.R' 'lpfr.R' 'lw.test.R' 'osplinepen2d.R' 'peer.R'
-        'pffr-ff.R' 'pffr-ffpc.R' 'pffr-methods.R' 'pffr-pcre.R'
-        'pffr-robust.R' 'pffr-sff.R' 'pffr-utilities.R' 'pffr.R'
-        'pfr.R' 'plot.fosr.R' 'plot.fosr.perm.R' 'plot.fpcr.R'
-        'plot.lpeer.R' 'plot.peer.R' 'predict.fgam.R' 'predict.wnet.R'
-        'pspline.setting.R' 'pwcv.R' 'reconstr.R' 'reconstr2d.R'
-        'reconstr3d.R' 'rlrt.pfr.R' 'fpca2s.R' 'fpca.ssvd.R'
-        'vis.fgam.R' 'wcr.R' 'wcr.perm.R' 'wnet.R' 'wnet.perm.R'
-        'parse.predict.pfr.R' 'postprocess.pfr.R' 'predict.pfr.R'
-        'preprocess.pfr.R' 'wUtil.R' 'plot.wnet-and-plot.wcr.R'
-        'irreg2mat.R'
-Packaged: 2014-06-28 16:33:17 UTC; Rayman
+Collate: 'Omegas.R' 'af.R' 'af_old.R' 'amc.R' 'ccb.fpc.R'
+        'create.prep.func.R' 'coefficients.pfr.R' 'dt_basis.R'
+        'irreg2mat.R' 'fbps.R' 'fgam.R' 'fosr.R' 'fosr.perm.R'
+        'fosr.perm.fit.R' 'fosr.perm.test.R' 'fosr.vs.R' 'fosr2s.R'
+        'fpc.R' 'fpca2s.R' 'fpca.sc.R' 'fpca.face.R' 'fpca.ssvd.R'
+        'fpcr.R' 'fpcr.setup.R' 'lf.R' 'lf_old.R' 'lf.vd.R' 'lofocv.R'
+        'lpeer.R' 'lpfr.R' 'quadWeights.R' 'lw.test.R' 'osplinepen2d.R'
+        'parse.predict.pfr.R' 'peer.R' 'peer_old.R' 'pffr-ff.R'
+        'pffr-ffpc.R' 'pffr-methods.R' 'pffr-pcre.R' 'pffr-robust.R'
+        'pffr-sff.R' 'pffr-utilities.R' 'pffr.R' 'pfr.R' 'pfr_old.R'
+        'pi_basis.R' 'plot.fosr.R' 'plot.fosr.perm.R' 'plot.fosr.vs.R'
+        'plot.fpcr.R' 'plot.lpeer.R' 'plot.peer.R' 'plot.pfr.R'
+        'postprocess.pfr.R' 'predict.fgam.R' 'predict.pfr.R'
+        'predict.pfr_old.R' 'preprocess.pfr.R' 'pspline.setting.R'
+        'pwcv.R' 'summary.pfr.R' 're.R' 'rlrt.pfr.R' 'vis.fgam.R'
+        'predict.fosr.vs.R' 'CD4-data.R' 'DTI-data.R' 'DTI2-data.R'
+        'PEER.Sim-data.R' 'gasoline-data.R' 'vis.pfr.R' 'GLS_CS.R'
+        'Gibbs_CS_FPCA.R' 'Gibbs_CS_Wish.R' 'Gibbs_Mult_FPCA.R'
+        'Gibbs_Mult_Wish.R' 'OLS_CS.R' 'VB_CS_FPCA.R' 'VB_CS_Wish.R'
+        'VB_Mult_FPCA.R' 'VB_Mult_Wish.R' 'XtSiginvX.R' 'bayes_fosr.R'
+        'f_sum.R' 'f_sum2.R' 'f_sum4.R' 'f_trace.R'
 NeedsCompilation: no
-Date/Publication: 2014-06-28 18:49:01
+Packaged: 2015-08-06 02:10:03 UTC; Rayman
+Author: Lei Huang [aut, cre],
+  Fabian Scheipl [aut],
+  Jeff Goldsmith [aut],
+  Jonathan Gellar [aut],
+  Jaroslaw Harezlak [aut],
+  Mathew W. McLean [aut],
+  Bruce Swihart [aut],
+  Luo Xiao [aut],
+  Ciprian Crainiceanu [aut],
+  Philip Reiss [aut],
+  Yakuan Chen [ctb],
+  Sonja Greven [ctb],
+  Lan Huo [ctb],
+  Madan Gopal Kundu [ctb]
+Maintainer: Lei Huang <huangracer@gmail.com>
+Date/Publication: 2015-08-06 07:16:03

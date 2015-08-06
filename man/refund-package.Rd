@@ -7,17 +7,17 @@
 Regression with Functional Data
 }
 \description{
-Methods for regression with functional data. Various approaches to regression with scalar responses and functional predictors are implemented by \code{\link{pfr}}, \code{\link{peer}}, \code{\link{lpeer}}, \code{\link{fpcr}}, \code{\link{wcr}} and \code{\link{wnet}}. For regression with functional responses, see \code{\link{pffr}}, \code{\link{fosr}}, and \code{\link{fosr2s}}.}
+Methods for regression with functional data. Various approaches to regression with scalar responses and functional predictors are implemented by \code{\link{pfr}}, \code{\link{peer}}, \code{\link{lpeer}} and \code{\link{fpcr}}. For regression with functional responses, see \code{\link{pffr}}, \code{\link{fosr}}, and \code{\link{fosr2s}}.}
 \details{For a complete list of functions type \code{library(help=refund)}.
 }
 
 \author{
 \emph{Authors:}
-Ciprian Crainiceanu \email{ccrainic@jhsph.edu}, Philip Reiss \email{phil.reiss@nyumc.org}, Jeff Goldsmith \email{jeff.goldsmith@columbia.edu}, Lei Huang \email{huangracer@gmail.com}, Lan Huo \email{lan.huo@nyumc.org}, Fabian Scheipl \email{fabian.scheipl@stat.uni-muenchen.de}.
+Lei Huang \email{huangracer@gmail.com}, Fabian Scheipl \email{fabian.scheipl@stat.uni-muenchen.de}, Jeff Goldsmith \email{jeff.goldsmith@columbia.edu}, Jonathan Gellar \email{jgellar1@jhu.edu}, Jaroslaw Harezlak, Mathew W. McLean \email{mathew.w.mclean@gmail.com}, Bruce Swihart \email{bswihart@jhsph.edu}, Luo Xiao \email{lxiao@jhsph.edu}, Ciprian Crainiceanu \email{ccrainic@jhsph.edu}, Philip Reiss \email{phil.reiss@nyumc.org}.
 
 
 \emph{Contributors:}
-Bruce Swihart, Luo Xiao, Sonja Greven, Jarek Harezlak, Madan Gopal Kundu, Matt McLean, Yihong Zhao
+Yakuan Chen, Sonja Greven, Lan Huo, Madan Gopal Kundu
 
 \emph{Maintainer:} Lei Huang \email{huangracer@gmail.com}
 }
