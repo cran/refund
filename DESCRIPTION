@@ -1,8 +1,8 @@
 Package: refund
 Type: Package
 Title: Regression with Functional Data
-Version: 0.1-12
-Date: 2015-08-02
+Version: 0.1-13
+Date: 2015-09-04
 Authors@R: c(person("Lei", "Huang", role = c("aut","cre"), email = "huangracer@gmail.com"), 
     person("Fabian", "Scheipl", role = "aut", email = "fabian.scheipl@stat.uni-muenchen.de"), 
     person("Jeff", "Goldsmith", role = "aut", email = "jeff.goldsmith@columbia.edu"), 
@@ -16,7 +16,8 @@ Authors@R: c(person("Lei", "Huang", role = c("aut","cre"), email = "huangracer@g
     person("Yakuan", "Chen", role="ctb", email = "yc2641@@cumc.columbia.edu"),
     person("Sonja", "Greven", role = "ctb"),
     person("Lan", "Huo", role = "ctb", email = "lan.huo@nyumc.org"), 
-    person(c("Madan", "Gopal"), "Kundu", role="ctb"))
+    person(c("Madan", "Gopal"), "Kundu", role="ctb"),
+    person("Julia", "Wrobel", role="ctb", email="jw3134@cumc.columbia.edu"))
 Depends: R (>= 2.14.0)
 Imports: fda, Matrix, lattice, boot, mgcv (>= 1.8-4), MASS, magic,
         nlme, gamm4, lme4, RLRsim, splines, grpreg, ggplot2, stats,
@@ -50,9 +51,8 @@ Collate: 'Omegas.R' 'af.R' 'af_old.R' 'amc.R' 'ccb.fpc.R'
         'Gibbs_CS_FPCA.R' 'Gibbs_CS_Wish.R' 'Gibbs_Mult_FPCA.R'
         'Gibbs_Mult_Wish.R' 'OLS_CS.R' 'VB_CS_FPCA.R' 'VB_CS_Wish.R'
         'VB_Mult_FPCA.R' 'VB_Mult_Wish.R' 'XtSiginvX.R' 'bayes_fosr.R'
-        'f_sum.R' 'f_sum2.R' 'f_sum4.R' 'f_trace.R'
-NeedsCompilation: no
-Packaged: 2015-08-06 02:10:03 UTC; Rayman
+        'f_sum.R' 'f_sum2.R' 'f_sum4.R' 'f_trace.R' 'mfpca.sc.R'
+Packaged: 2015-09-08 15:15:56 UTC; Rayman
 Author: Lei Huang [aut, cre],
   Fabian Scheipl [aut],
   Jeff Goldsmith [aut],
@@ -66,6 +66,8 @@ Author: Lei Huang [aut, cre],
   Yakuan Chen [ctb],
   Sonja Greven [ctb],
   Lan Huo [ctb],
-  Madan Gopal Kundu [ctb]
+  Madan Gopal Kundu [ctb],
+  Julia Wrobel [ctb]
 Maintainer: Lei Huang <huangracer@gmail.com>
-Date/Publication: 2015-08-06 07:16:03
+NeedsCompilation: no
+Date/Publication: 2015-09-08 19:51:23
