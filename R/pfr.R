@@ -36,7 +36,7 @@
 #'   additional information in a \code{$pfr}-element. If fitter is \code{"gamm"}
 #'   or \code{"gamm4"}, only the \code{$gam} part of the returned list is
 #'   modified in this way.
-#' 
+#'
 #' @references
 #' Goldsmith, J., Bobb, J., Crainiceanu, C., Caffo, B., and Reich, D. (2011).
 #' Penalized functional regression. \emph{Journal of Computational and Graphical
@@ -120,7 +120,7 @@
 #' coef.re <- coef(fit.re)
 #' par(mfrow=c(1,2))
 #' plot(fit.re)
-#' 
+#'
 #' # FPCR_R Model
 #' fit.fpc <- pfr(pasat ~ fpc(cca), data=DTI.re)
 #' plot(fit.fpc)
@@ -191,7 +191,7 @@ pfr <- function(formula=NULL, fitter=NA, method="REML", ...){
   newfrml <- paste(responsename, "~", sep = "")
   newfrmlenv <- new.env()
   evalenv <- if ("data" %in% names(call))
-    eval(call$data)
+    eval.parent(call$data)
   else NULL
   nobs <- length(eval(responsename, envir = evalenv, enclos = frmlenv))
 
@@ -276,8 +276,11 @@ pfr <- function(formula=NULL, fitter=NA, method="REML", ...){
   datameans <- sapply(as.list(newfrmlenv), function(x){
     if (is.numeric(x) | is.logical(x)) {
       mean(x)
-    } else NA
-  })
+    }else if (is.factor(x)){
+      names(which.max(table(x)))
+    }else
+        NA
+  }, simplify = FALSE)
   newcall <- expand.call(pfr, call)
   newcall$fitter  <- newcall$bs.int <- newcall$bs.yindex <- NULL
   newcall$formula <- newfrml

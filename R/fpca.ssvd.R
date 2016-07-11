@@ -1,58 +1,70 @@
-#'  Smoothed FPCA via iterative penalized rank one SVDs.
-#'  
-#'  Implements the algorithm of Huang, Shen, Buja (2008) for finding smooth 
-#'  right singular vectors of a matrix \code{X} containing (contaminated) 
-#'  evaluations of functional random variables on a regular, equidistant grid. 
-#'  If the number of smooth SVs to extract is not specified, the function 
-#'  hazards a guess for the appropriate number based on the asymptotically 
-#'  optimal truncation threshold under the assumption of a low rank matrix 
-#'  contaminated with i.i.d. Gaussian noise with unknown variance derived in 
-#'  Donoho, Gavish (2013). Please note that Donoho, Gavish (2013) should be 
-#'  regarded as experimental for functional PCA, and will typically not work 
-#'  well if you have more observations than grid points.
-#'  
-#'  @param Y data matrix (rows: observations; columns: grid of eval. points)
-#'  @param argvals the argument values where functions are evaluated. It is
-#'    implemented yet.
-#'  @param npc how many smooth SVs to try to extract, if \code{NA} (the default)
-#'    the hard thresholding rule of Donoho, Gavish (2013) is used (see Details,
-#'    References).
-#'  @param center center \code{Y} so that its column-means are 0? Defaults to
-#'    \code{TRUE}
-#'  @param maxiter how many iterations of the power algorithm to perform at most
-#'    (defaults to 15)
-#'  @param tol convergence tolerance for power algorithm (defaults to 1e-4)
-#'  @param diffpen difference penalty order controlling the desired smoothness
-#'    of the right singular vectors, defaults to 3 (i.e., deviations from local
-#'    quadratic polynomials).
-#'  @param gridsearch use \code{\link[stats]{optimize}} or a grid search to find
-#'    GCV-optimal smoothing parameters? defaults to \code{TRUE}.
-#'  @param alphagrid  grid of smoothing parameter values for grid search
-#'  @param lower.alpha lower limit for for smoothing parameter if
-#'    \code{!gridsearch}
-#'  @param upper.alpha upper limit for smoothing parameter if \code{!gridsearch}
-#'  @param verbose generate graphical summary of progress and diagnostic
-#'    messages? defaults to \code{FALSE}
-#'  @return an \code{fpca} object like that returned from \code{\link{fpca.sc}}, with
-#'    entries \code{Yhat}, the smoothed trajectories, \code{Y}, the observed data,
-#'    \code{scores}, the estimated FPC loadings, \code{mu}, the column means of \code{Y} (or a
-#'    vector of zeroes if \code{!center}),  \code{efunctions}, the estimated
-#'    smooth FPCs (note that these are orthonormal vectors, not evaluations of
-#'    orthonormal functions...), \code{evalues}, their associated eigenvalues,
-#'    and \code{npc}, the number of smooth components that were extracted.
-#'  @seealso  \code{\link{fpca.sc}} and \code{\link{fpca.face}} for FPCA based
-#'    on smoothing a covariance estimate; \code{\link{fpca2s}} for a faster
-#'    SVD-based approach.
-#'  @author Fabian Scheipl
-#'  @export
-#'  @references Huang, J. Z., Shen, H., and Buja, A. (2008). Functional
-#'    principal components analysis via penalized rank one approximation. 
-#'    \emph{Electronic Journal of Statistics}, 2, 678-695
-#'    
-#'    Donoho, D.L., and Gavish, M. (2013). The Optimal Hard Threshold for
-#'    Singular Values is 4/sqrt(3). eprint arXiv:1305.5870. Available from
-#'    \url{http://arxiv.org/abs/1305.5870}.
-#'    @examples 
+#'Smoothed FPCA via iterative penalized rank one SVDs.
+#'
+#'Implements the algorithm of Huang, Shen, Buja (2008) for finding smooth right
+#'singular vectors of a matrix \code{X} containing (contaminated) evaluations of
+#'functional random variables on a regular, equidistant grid. If the number of
+#'smooth SVs to extract is not specified, the function hazards a guess for the
+#'appropriate number based on the asymptotically optimal truncation threshold
+#'under the assumption of a low rank matrix contaminated with i.i.d. Gaussian
+#'noise with unknown variance derived in Donoho, Gavish (2013). Please note that
+#'Donoho, Gavish (2013) should be regarded as experimental for functional PCA,
+#'and will typically not work well if you have more observations than grid
+#'points.
+#'
+#'@param Y data matrix (rows: observations; columns: grid of eval. points)
+#'@param ydata a data frame \code{ydata} representing
+#'  irregularly observed functions. NOT IMPLEMENTED for this method.
+#'@param argvals the argument values of the function evaluations in \code{Y},
+#'  defaults to a equidistant grid from 0 to 1. See Details.
+#'@param npc how many smooth SVs to try to extract, if \code{NA} (the default)
+#'  the hard thresholding rule of Donoho, Gavish (2013) is used (see Details,
+#'  References).
+#'@param center center \code{Y} so that its column-means are 0? Defaults to
+#'  \code{TRUE}
+#'@param maxiter how many iterations of the power algorithm to perform at most
+#'  (defaults to 15)
+#'@param tol convergence tolerance for power algorithm (defaults to 1e-4)
+#'@param diffpen difference penalty order controlling the desired smoothness of
+#'  the right singular vectors, defaults to 3 (i.e., deviations from local
+#'  quadratic polynomials).
+#'@param gridsearch use \code{\link[stats]{optimize}} or a grid search to find
+#'  GCV-optimal smoothing parameters? defaults to \code{TRUE}.
+#'@param alphagrid  grid of smoothing parameter values for grid search
+#'@param lower.alpha lower limit for for smoothing parameter if
+#'  \code{!gridsearch}
+#'@param upper.alpha upper limit for smoothing parameter if \code{!gridsearch}
+#'@param verbose generate graphical summary of progress and diagnostic messages?
+#'  defaults to \code{FALSE}
+#' @param integration ignored, see Details.
+#'@details Note that \code{fpca.ssvd} computes smoothed orthonormal eigenvectors
+#'  of the supplied function evaluations (and associated scores), not (!)
+#'  evaluations of the smoothed orthormal eigenfunctions. The smoothed
+#'  orthonormal eigenvectors are then rescaled by the length of the domain
+#'  defined by \code{argvals} to have a quadratic integral approximately equal
+#'  to one (instead of crossproduct equal to one), so they approximate the behavior
+#'  of smooth eigenfunctions. If \code{argvals} is not equidistant,
+#'  \code{fpca.ssvd} will simply return the smoothed eigenvectors without rescaling,
+#'  with a warning.
+#'@return an \code{fpca} object like that returned from \code{\link{fpca.sc}},
+#'  with entries \code{Yhat}, the smoothed trajectories, \code{Y}, the observed
+#'  data, \code{scores}, the estimated FPC loadings, \code{mu}, the column means
+#'  of \code{Y} (or a vector of zeroes if \code{!center}),  \code{efunctions},
+#'  the estimated smooth FPCs (note that these are orthonormal vectors, not
+#'  evaluations of orthonormal functions if \code{argvals} is not equidistant),
+#'  \code{evalues}, their associated eigenvalues, and \code{npc}, the number of
+#'  smooth components that were extracted.
+#'@seealso  \code{\link{fpca.sc}} and \code{\link{fpca.face}} for FPCA based on
+#'  smoothing a covariance estimate; \code{\link{fpca2s}} for a faster SVD-based
+#'  approach.
+#'@author Fabian Scheipl
+#'@references Huang, J. Z., Shen, H., and Buja, A. (2008). Functional principal
+#'  components analysis via penalized rank one approximation. \emph{Electronic
+#'  Journal of Statistics}, 2, 678-695
+#'
+#'  Donoho, D.L., and Gavish, M. (2013). The Optimal Hard Threshold for Singular
+#'  Values is 4/sqrt(3). eprint arXiv:1305.5870. Available from
+#'  \url{http://arxiv.org/abs/1305.5870}.
+#'@examples
 #'  ## as in Sec. 6.2 of Huang, Shen, Buja (2008):
 #'  set.seed(2678695)
 #'  n <- 101
@@ -69,7 +81,7 @@
 #'  eps <- matrix(rnorm(m*n, sd=s), n, m)
 #'  Y <- U%*%D%*%t(V) + eps
 #'
-#'  smoothSV <- fpca.ssvd(Y, verbose=TRUE)
+#' smoothSV <- fpca.ssvd(Y, verbose=TRUE)
 #'
 #'  layout(t(matrix(1:4, nr=2)))
 #'  clrs <- sapply(rainbow(n), function(c)
@@ -82,11 +94,37 @@
 #'          main="true smooth Y", bty="n")
 #'  matplot(1:m, t(smoothSV$Yhat), xlab="", ylab="",
 #'          type="l", lty=1,col=clrs, main="estimated smooth Y", bty="n")
-fpca.ssvd <- function(Y, argvals = NULL, npc = NA, center = TRUE, maxiter = 15,
-  tol = 1e-4, diffpen = 3, gridsearch = TRUE, alphagrid = 1.5^(-20:40),
-  lower.alpha = 1e-5, upper.alpha = 1e7, verbose = FALSE){
+#'@export
 
-  if(!is.null(argvals)) warning("<argvals> is not supported and will be ignored.")
+fpca.ssvd <- function(Y=NULL, ydata = NULL, argvals = NULL, npc = NA, center = TRUE, maxiter = 15,
+  tol = 1e-4, diffpen = 3, gridsearch = TRUE, alphagrid = 1.5^(-20:40),
+  lower.alpha = 1e-5, upper.alpha = 1e7, verbose = FALSE, integration = "trapezoidal"){
+
+  stopifnot(!is.null(Y))
+  if(any(is.na(Y))) stop("No missing values in <Y> allowed.")
+  m <- ncol(Y)
+  n <- nrow(Y)
+  if(!is.null(ydata)) {
+    stop(paste("<ydata> argument for irregular data is not supported,",
+        "please use fpca.sc instead."))
+  }
+  irregular <- FALSE
+  if(!is.null(argvals)) {
+    stopifnot(is.numeric(argvals),
+      length(argvals) == m,
+      all(!is.na(argvals)))
+    if(any(diff(argvals)/mean(diff(argvals)) > 1.05 |
+        diff(argvals)/mean(diff(argvals)) < 0.95)) {
+      warning(paste("non-equidistant <argvals>-grid detected:",
+        "fpca.ssvd will return orthonormal eigenvectors of the function evaluations",
+        "not evaluations of the orthonormal eigenvectors.",
+        "Use fpca.sc() for the latter instead."))
+      irregular <- TRUE
+    }
+  } else {
+    argvals <- seq(0, 1, length = m)
+  }
+
 
   #GCV criterion from eq. (10), App. C:
   gcv <- function(alpha, w, m, lambda){
@@ -101,11 +139,6 @@ fpca.ssvd <- function(Y, argvals = NULL, npc = NA, center = TRUE, maxiter = 15,
       return(diff(makeDiffOp(degree-1, dim)))
     }
   }
-
-
-  if(any(is.na(Y))) stop("No missing values in <Y> allowed.")
-  m <- ncol(Y)
-  n <- nrow(Y)
 
   if(is.na(npc)){
     npc <- getNPC.DonohoGavish(Y)
@@ -140,6 +173,7 @@ fpca.ssvd <- function(Y, argvals = NULL, npc = NA, center = TRUE, maxiter = 15,
   V <- matrix(NA, nrow=m, ncol=npc)
   d <- rep(NA, npc)
 
+  Yorig <- Y
   if(center){
     meanY <- predict(smooth.spline(x=1:m, y=colMeans(Y)), x=1:m)$y
     Y <- t(t(Y) - meanY)
@@ -211,20 +245,27 @@ fpca.ssvd <- function(Y, argvals = NULL, npc = NA, center = TRUE, maxiter = 15,
   }# end for(k)
   if(length(uhoh)) warning("First SV for remaining un-smooth signal larger than ",
     "SV found for smooth signal for component(s) ", paste(uhoh, collapse=","))
-
-  #     return(list(smooth=list(d=d, u=U, v=V),
-  #                     noise=svd(Ynow, nu=min(dim(Y))-npc, nv=min(dim(Y))-npc),
-  #                     mean=meanY))
-  scores <- U%*%(d*diag(length(d)))
+  if(!irregular){
+    # scale smooth eigenvectors so they're scaled as realizations of orthonormal
+    # eigenfunctions i.e. so that colSums(diff(argvals) * V^2) == 1 instead of
+    # crossprod(V) == diag(npc)
+    scale <- sqrt(mean(diff(argvals)))
+    V <- V / scale
+    d <-  d * scale
+  } else {
+    scale <- 1
+  }
+  scores <- U%*%(d * diag(length(d)))
 
   ret = list(
-    Yhat= t(meanY + t(scores%*%t(V))),
-    Y = Y,
-    scores=scores,
-    mu=meanY,
-    efunctions=V,
-    evalues=d^2,
-    npc=npc)
+    Yhat = t(meanY + t(scores%*%t(V))),
+    Y = Yorig,
+    scores = scores,
+    mu = meanY,
+    efunctions = V,
+    #FIXME: this should be d^2 but the scaling is way off....
+    evalues = diag(var(scores)),
+    npc = npc)
   class(ret) = "fpca"
   return(ret)
 
