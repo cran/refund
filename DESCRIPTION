@@ -1,7 +1,7 @@
 Package: refund
 Type: Package
 Title: Regression with Functional Data
-Version: 0.1-15
+Version: 0.1-16
 Date: 2016-07-10
 Authors@R: c(
     person("Jeff", "Goldsmith", role = "aut", email = "jeff.goldsmith@columbia.edu"),
@@ -59,7 +59,7 @@ Collate: 'Omegas.R' 'af.R' 'af_old.R' 'amc.R' 'ccb.fpc.R'
         'f_trace.R' 'mfpca.sc.R' 'fpca.lfda.R' 'predict.fbps.R'
         'select_knots.R'
 RoxygenNote: 5.0.1
-Packaged: 2016-07-11 00:14:21 UTC; Rayman
+Packaged: 2016-08-03 04:53:38 UTC; Rayman
 Author: Jeff Goldsmith [aut],
   Fabian Scheipl [aut],
   Lei Huang [aut, cre],
@@ -80,4 +80,4 @@ Author: Jeff Goldsmith [aut],
   Ana-Maria Staicu [ctb]
 Maintainer: Lei Huang <huangracer@gmail.com>
 NeedsCompilation: no
-Date/Publication: 2016-07-11 08:44:58
+Date/Publication: 2016-08-03 10:09:56

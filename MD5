@@ -1,4 +1,4 @@
-3ee0bd68becd45f818be79ded15dd246 *DESCRIPTION
+2fc9b797b5151165f6ac21f500c8e93d *DESCRIPTION
 7c0c096c62ee13c6cd3dbae24678d008 *NAMESPACE
 23d0eeb9b98fa881b6a08c2b8e3a4c9f *R/CD4-data.R
 87cb66243a348d9df7657fdce47b933a *R/DTI-data.R
@@ -18,7 +18,7 @@ c04d8bd90e2278373fa47c071b1f5ab6 *R/VB_Mult_Wish.R
 05670c5384d066f529e5fa6414a2a335 *R/XtSiginvX.R
 8a9d4dcb280d0b8bcd4318cb7ab61bf5 *R/af.R
 812ad930fc9e14eff10727973f5d3112 *R/af_old.R
-773f77caa8186635d9348f265f6cd0f7 *R/amc.R
+db078b83bbec2f44ecbde03e3fad82a1 *R/amc.R
 9e73fe49973eef243817d70b024591b4 *R/bayes_fosr.R
 93fb7560349ff328a675248c439f6bd1 *R/ccb.fpc.R
 d0edcb53f71660d1ad7bd6c59e2c4a5c *R/coefficients.pfr.R
@@ -30,7 +30,7 @@ c94e002e4b591d77c0c64372d47cb014 *R/dt_basis.R
 73cc26396208ea8caa63d9bbe2c0bce1 *R/f_trace.R
 6cd5bd349d780ea88c7bf013c80e8afd *R/fbps.R
 36d8cfc055ea00823072dcf4161652bb *R/fgam.R
-2c0b4aca0ebe532b801b622e2e672c73 *R/fosr.R
+c0cf6895bf97b6f4bd750c34337a6e00 *R/fosr.R
 553c5e63868b29b11bc4adb878cae7ba *R/fosr.perm.R
 daf055157b2a83a02a1b9b2cf6b2711f *R/fosr.perm.fit.R
 f89b1d274b1d7c0ed17161408328352d *R/fosr.perm.test.R
