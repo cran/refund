@@ -1,13 +1,13 @@
 Package: refund
 Type: Package
 Title: Regression with Functional Data
-Version: 0.1-16
-Date: 2016-07-10
+Version: 0.1-17
+Date: 2018-05-15
 Authors@R: c(
     person("Jeff", "Goldsmith", role = "aut", email = "jeff.goldsmith@columbia.edu"),
     person("Fabian", "Scheipl", role = "aut", email = "fabian.scheipl@stat.uni-muenchen.de"),
-    person("Lei", "Huang", role = c("aut","cre"), email = "huangracer@gmail.com"),
-    person("Julia", "Wrobel", role="aut", email="jw3134@cumc.columbia.edu"),
+    person("Lei", "Huang", role = "aut", email = "huangracer@gmail.com"),
+    person("Julia", "Wrobel", role=c("aut", "cre"), email="jw3134@cumc.columbia.edu"),
     person("Jonathan", "Gellar", role="aut",email="jgellar1@jhu.edu"),
     person("Jaroslaw", "Harezlak", role="aut"),
     person(c("Mathew", "W."), "McLean", role="aut", email = "mathew.w.mclean@gmail.com"),
@@ -58,12 +58,12 @@ Collate: 'Omegas.R' 'af.R' 'af_old.R' 'amc.R' 'ccb.fpc.R'
         'XtSiginvX.R' 'bayes_fosr.R' 'f_sum.R' 'f_sum2.R' 'f_sum4.R'
         'f_trace.R' 'mfpca.sc.R' 'fpca.lfda.R' 'predict.fbps.R'
         'select_knots.R'
-RoxygenNote: 5.0.1
-Packaged: 2016-08-03 04:53:38 UTC; Rayman
+RoxygenNote: 6.0.1
+Packaged: 2018-05-15 12:53:12 UTC; juliawrobel
 Author: Jeff Goldsmith [aut],
   Fabian Scheipl [aut],
-  Lei Huang [aut, cre],
-  Julia Wrobel [aut],
+  Lei Huang [aut],
+  Julia Wrobel [aut, cre],
   Jonathan Gellar [aut],
   Jaroslaw Harezlak [aut],
   Mathew W. McLean [aut],
@@ -78,6 +78,6 @@ Author: Jeff Goldsmith [aut],
   So Young Park [ctb],
   David L. Miller [ctb],
   Ana-Maria Staicu [ctb]
-Maintainer: Lei Huang <huangracer@gmail.com>
 NeedsCompilation: no
-Date/Publication: 2016-08-03 10:09:56
+Maintainer: Julia Wrobel <jw3134@cumc.columbia.edu>
+Date/Publication: 2018-05-15 16:39:40 UTC
