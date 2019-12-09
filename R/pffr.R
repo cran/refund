@@ -620,7 +620,7 @@ pffr <- function(
     }
     xnew[[length(xnew)+1]] <- yindvecname
     this.bs.yindex <- if("bs.yindex" %in% names(x)){
-      x$bs.yindex
+      eval(x$bs.yindex)
     } else bs.yindex
     xnew <- xnew[names(xnew) != "bs.yindex"]
 
@@ -659,17 +659,18 @@ pffr <- function(
     #defaults to 8 basis functions
     xnew$k <- if("k" %in% names(x)){
       if("k" %in% names(this.bs.yindex)){
-        c(xnew$k, this.bs.yindex$k)
+        c(eval(xnew$k), eval(this.bs.yindex$k))
       } else {
-        c(xnew$k, 8)
+        c(eval(xnew$k), 8)
       }
     } else {
       if("k" %in% names(this.bs.yindex)){
-        c(pmax(8, 5^head(xnew$d, -1)), this.bs.yindex$k)
+        c(pmax(8, 5^head(eval(xnew$d), -1)), eval(this.bs.yindex$k))
       } else {
-        pmax(8, 5^xnew$d)
+        pmax(8, 5^eval(xnew$d))
       }
     }
+    xnew$k <- unlist(xnew$k)
 
     if("xt" %in% names(x)){
 #       # xt has to be supplied as a list, with length(x$d) entries,
@@ -779,7 +780,8 @@ pffr <- function(
         newcall$weights <- dots$weights[stackpattern]
         wtsdone <- TRUE
     }
-    if(!is.null(dim(dots$weights)) && dim(dots$weights) == c(nobs, nyindex)){
+    if (!is.null(dim(dots$weights)) &&
+       all(dim(dots$weights) == c(nobs, nyindex))) {
         newcall$weights <- as.vector(t(dots$weights))
         wtsdone <- TRUE
     }
@@ -794,7 +796,8 @@ pffr <- function(
         newcall$offset <- dots$offset[stackpattern]
         ofstdone <- TRUE
     }
-    if(!is.null(dim(dots$offset)) && dim(dots$offset) == c(nobs, nyindex)){
+    if(!is.null(dim(dots$offset)) &&
+       all(dim(dots$offset) == c(nobs, nyindex))){
         newcall$offset <- as.vector(t(dots$offset))
         ofstdone <- TRUE
     }
@@ -883,7 +886,11 @@ pffr <- function(
 
   }
   # check whether any parametric terms were left out & add them
-  if(any(nalbls <- sapply(labelmap, function(x) any(is.null(x) | (!is.null(x)&&is.na(x)))))){
+  nalbls <- sapply(labelmap,
+                   function(x) {
+                     any(is.null(x)) | any(is.na(x[!is.null(x)]))
+                   })
+  if (any(nalbls)) {
     labelmap[nalbls] <- trmmap[nalbls]
   }
 

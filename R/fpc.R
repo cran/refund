@@ -24,7 +24,7 @@
 #' @param pve proportion of variance explained; used to choose the number of
 #'   principal components
 #' @param penalize if \code{TRUE}, a roughness penalty is applied to the
-#'   functional estimate. Deafults to \code{TRUE} if \code{method=="svd"}
+#'   functional estimate. Defaults to \code{TRUE} if \code{method=="svd"}
 #'   (corresponding to the FPCR_R method of Reiss and Ogden (2007)), and
 #'   \code{FALSE} if \code{method!="svd"} (corresponding to FPCR_C).
 #' @param bs two letter character string indicating the \code{mgcv}-style basis
@@ -50,7 +50,7 @@
 #' }
 #' 
 #' This implementation provides options for each of these steps. The basis
-#' for in step 1 can be specified using the arguemnts \code{bs} and \code{k},
+#' for in step 1 can be specified using the arguments \code{bs} and \code{k},
 #' as well as other options via \code{...}; see \code{\link[mgcv]{s}} for
 #' these options. The type of PC-decomposition is specified with \code{method}.
 #' And the FLM can be fit either penalized or unpenalized via \code{penalize}.
@@ -59,7 +59,7 @@
 #' principal components decomposition using \code{\link{svd}}, and the FLM
 #' fit with a second-order difference penalty. FPCR-C can be selected by
 #' using a different option for \code{method}, indicating a constrained
-#' ("functional") PC decomposition, and by default an unpeanlized fit of the
+#' ("functional") PC decomposition, and by default an unpenalized fit of the
 #' FLM.
 #' 
 #' FPCR-R is also implemented in \code{\link{fpcr}}; here we implement the
@@ -88,6 +88,7 @@
 #'   \email{phil.reiss@@nyumc.org}, Lan Huo \email{lan.huo@@nyumc.org}, and
 #'   Lei Huang \email{huangracer@@gmail.com}
 #' 
+#' 
 #' @examples
 #' data(gasoline)
 #' par(mfrow=c(3,1))
@@ -114,6 +115,7 @@
 #' lines(value ~ X.argvals, col=3, data=est3)
 #' 
 #' @seealso \code{\link{lf}}, \code{\link{smooth.construct.fpc.smooth.spec}}
+#' @importFrom methods is
 #' @export
 
 fpc <- function(X, argvals=NULL, 
@@ -122,10 +124,10 @@ fpc <- function(X, argvals=NULL,
                 bs="ps", k=40, ...) {
   method <- match.arg(method)
   
-  if (class(X)=="fd") {
+  if (is(X, "fd")) {
     # If X is an fd object, turn it back into a (possibly pre-smoothed) matrix
     if (is.null(argvals))
-      argvals <- argvals <- seq(X$basis$rangeval[1], X$basis$rangeval[2],
+      argvals <- seq(X$basis$rangeval[1], X$basis$rangeval[2],
                                 length = length(X$fdnames[[1]]))
     X <- t(eval.fd(argvals, X))
   } else if (is.null(argvals))

@@ -28,7 +28,7 @@
 #'   integration over \code{t}. If present, overrides \code{integration}.
 #' @param presmooth string indicating the method to be used for preprocessing functional predictor prior 
 #'   to fitting. Options are \code{fpca.sc}, \code{fpca.face}, \code{fpca.ssvd}, \code{fpca.bspline}, and 
-#'   \code{fpca.interpolate}. Defaults to \code{NULL} indicateing no preprocessing. See
+#'   \code{fpca.interpolate}. Defaults to \code{NULL} indicating no preprocessing. See
 #'   \code{\link{create.prep.func}}.
 #' @param presmooth.opts list including options passed to preprocessing method
 #'   \code{\link{create.prep.func}}.
@@ -83,8 +83,9 @@
 #' pairs(fits)
 #' 
 #' @seealso \code{\link{pfr}}, \code{\link{af}}, mgcv's \code{\link{smooth.terms}}
-#'  and \code{\link{linear.functional.terms}}; \code{\link{pfr}} for additonal examples
+#'  and \code{\link{linear.functional.terms}}; \code{\link{pfr}} for additional examples
 #' @importFrom fda eval.fd
+#' @importFrom methods is
 #' @export lf
 
 
@@ -112,7 +113,7 @@ lf <- function(X, argvals = NULL, xind = NULL,
     argvals = xind
   }
   
-  if (class(X)=="fd") {
+  if (is(X, "fd")) {
     # If X is an fd object, turn it back into a (possibly pre-smoothed) matrix
     if (is.null(argvals))
       argvals <- argvals <- seq(X$basis$rangeval[1], X$basis$rangeval[2],

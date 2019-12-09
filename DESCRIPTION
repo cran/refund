@@ -1,13 +1,14 @@
 Package: refund
 Type: Package
 Title: Regression with Functional Data
-Version: 0.1-17
-Date: 2018-05-15
+Version: 0.1-21
+Date: 2019-12-06
 Authors@R: c(
     person("Jeff", "Goldsmith", role = "aut", email = "jeff.goldsmith@columbia.edu"),
     person("Fabian", "Scheipl", role = "aut", email = "fabian.scheipl@stat.uni-muenchen.de"),
     person("Lei", "Huang", role = "aut", email = "huangracer@gmail.com"),
-    person("Julia", "Wrobel", role=c("aut", "cre"), email="jw3134@cumc.columbia.edu"),
+    person("Julia", "Wrobel", role = c("aut","cre"), email="julia.wrobel@cuanschutz.edu"),
+    person("Chongzhi", "Di", role = "aut", email = "cdi@fredhutch.org"),
     person("Jonathan", "Gellar", role="aut",email="jgellar1@jhu.edu"),
     person("Jaroslaw", "Harezlak", role="aut"),
     person(c("Mathew", "W."), "McLean", role="aut", email = "mathew.w.mclean@gmail.com"),
@@ -22,11 +23,11 @@ Authors@R: c(
     person("So Young", "Park", role="ctb", email="spark13@ncsu.edu"),
     person(c("David", "L."), "Miller", role="ctb", email="dave@ninepointeightone.net"),
     person("Ana-Maria", "Staicu", role="ctb", email="ana-maria_staicu@ncsu.edu"))
-Depends: R (>= 2.14.0)
-Imports: fda, Matrix, lattice, boot, mgcv (>= 1.8-12), MASS, magic,
+Depends: R (>= 3.00.0)
+Imports: fda, Matrix, lattice, boot, mgcv (>= 1.8-23), MASS, magic,
         nlme, gamm4, lme4, RLRsim, splines, grpreg, ggplot2, stats,
         pbs, methods
-Suggests: RColorBrewer, reshape2, dtw
+Suggests: RColorBrewer, reshape2, testthat
 Description: Methods for regression for functional
     data, including function-on-scalar, scalar-on-function, and
     function-on-function regression. Some of the functions are applicable to
@@ -58,12 +59,14 @@ Collate: 'Omegas.R' 'af.R' 'af_old.R' 'amc.R' 'ccb.fpc.R'
         'XtSiginvX.R' 'bayes_fosr.R' 'f_sum.R' 'f_sum2.R' 'f_sum4.R'
         'f_trace.R' 'mfpca.sc.R' 'fpca.lfda.R' 'predict.fbps.R'
         'select_knots.R'
-RoxygenNote: 6.0.1
-Packaged: 2018-05-15 12:53:12 UTC; juliawrobel
+RoxygenNote: 6.1.1
+NeedsCompilation: no
+Packaged: 2019-12-09 14:39:38 UTC; juliawrobel
 Author: Jeff Goldsmith [aut],
   Fabian Scheipl [aut],
   Lei Huang [aut],
   Julia Wrobel [aut, cre],
+  Chongzhi Di [aut],
   Jonathan Gellar [aut],
   Jaroslaw Harezlak [aut],
   Mathew W. McLean [aut],
@@ -78,6 +81,5 @@ Author: Jeff Goldsmith [aut],
   So Young Park [ctb],
   David L. Miller [ctb],
   Ana-Maria Staicu [ctb]
-NeedsCompilation: no
-Maintainer: Julia Wrobel <jw3134@cumc.columbia.edu>
-Date/Publication: 2018-05-15 16:39:40 UTC
+Maintainer: Julia Wrobel <julia.wrobel@cuanschutz.edu>
+Date/Publication: 2019-12-09 18:30:02 UTC
