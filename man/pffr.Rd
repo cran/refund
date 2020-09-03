@@ -4,10 +4,18 @@
 \alias{pffr}
 \title{Penalized flexible functional regression}
 \usage{
-pffr(formula, yind, data = NULL, ydata = NULL, algorithm = NA,
-  method = "REML", tensortype = c("ti", "t2"), bs.yindex = list(bs =
-  "ps", k = 5, m = c(2, 1)), bs.int = list(bs = "ps", k = 20, m = c(2,
-  1)), ...)
+pffr(
+  formula,
+  yind,
+  data = NULL,
+  ydata = NULL,
+  algorithm = NA,
+  method = "REML",
+  tensortype = c("ti", "t2"),
+  bs.yindex = list(bs = "ps", k = 5, m = c(2, 1)),
+  bs.int = list(bs = "ps", k = 20, m = c(2, 1)),
+  ...
+)
 }
 \arguments{
 \item{formula}{a formula with special terms as for \code{\link[mgcv]{gam}},
@@ -188,7 +196,7 @@ necessarily continuous) response \eqn{Y(t)}, response function \eqn{g},
 \examples{
 ###############################################################################
 # univariate model:
-# Y(t) = f(t)  + \\int X1(s)\\beta(s,t)ds + eps
+# Y(t) = f(t)  + \int X1(s)\beta(s,t)ds + eps
 set.seed(2121)
 data1 <- pffrSim(scenario="ff", n=40)
 t <- attr(data1, "yindex")
@@ -200,8 +208,8 @@ plot(m1, pers=TRUE, pages=1)
 \dontrun{
 ###############################################################################
 # multivariate model:
-# E(Y(t)) = \\beta_0(t)  + \\int X1(s)\\beta_1(s,t)ds + xlin \\beta_3(t) +
-#        f_1(xte1, xte2) + f_2(xsmoo, t) + \\beta_4 xconst
+# E(Y(t)) = \beta_0(t)  + \int X1(s)\beta_1(s,t)ds + xlin \beta_3(t) +
+#        f_1(xte1, xte2) + f_2(xsmoo, t) + \beta_4 xconst
 data2 <- pffrSim(scenario="all", n=200)
 t <- attr(data2, "yindex")
 s <- attr(data2, "xindex")
@@ -237,15 +245,15 @@ plot(m3.sparse, pers=TRUE, pages=1)
 \references{
 Ivanescu, A., Staicu, A.-M., Scheipl, F. and Greven, S. (2015).
   Penalized function-on-function regression. Computational Statistics,
-  30(2):539--568. \url{http://biostats.bepress.com/jhubiostat/paper254/}
+  30(2):539--568. \url{https://biostats.bepress.com/jhubiostat/paper254/}
 
   Scheipl, F., Staicu, A.-M. and Greven, S. (2015). Functional Additive Mixed
   Models. Journal of Computational & Graphical Statistics, 24(2): 477--501.
-  \url{http://arxiv.org/abs/1207.5947}
+  \url{ https://arxiv.org/abs/1207.5947}
 
   F. Scheipl, J. Gertheiss, S. Greven (2016):  Generalized Functional Additive Mixed Models,
   Electronic Journal of Statistics, 10(1), 1455--1492.
-  \url{https://projecteuclid.org/euclid.ejs/1464710238}
+  \url{https://projecteuclid.org/euclid.ejs/1464710238/}
 }
 \seealso{
 \code{\link[mgcv]{smooth.terms}} for details of \code{mgcv} syntax

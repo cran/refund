@@ -4,11 +4,29 @@
 \alias{fpcr}
 \title{Functional principal component regression}
 \usage{
-fpcr(y, xfuncs = NULL, fdobj = NULL, ncomp = NULL, pve = 0.99,
-  nbasis = NULL, basismat = NULL, penmat = NULL, argvals = NULL,
-  covt = NULL, mean.signal.term = FALSE, spline.order = NULL,
-  family = "gaussian", method = "REML", sp = NULL, pen.order = 2,
-  cv1 = FALSE, nfold = 5, store.cv = FALSE, store.gam = TRUE, ...)
+fpcr(
+  y,
+  xfuncs = NULL,
+  fdobj = NULL,
+  ncomp = NULL,
+  pve = 0.99,
+  nbasis = NULL,
+  basismat = NULL,
+  penmat = NULL,
+  argvals = NULL,
+  covt = NULL,
+  mean.signal.term = FALSE,
+  spline.order = NULL,
+  family = "gaussian",
+  method = "REML",
+  sp = NULL,
+  pen.order = 2,
+  cv1 = FALSE,
+  nfold = 5,
+  store.cv = FALSE,
+  store.gam = TRUE,
+  ...
+)
 }
 \arguments{
 \item{y}{scalar outcome vector.}
@@ -198,7 +216,7 @@ Analysis with R and MATLAB}. New York: Springer.
 
 Reiss, P. T. (2006).  Regression with signals and images as predictors.
 Ph.D. dissertation, Department of Biostatistics, Columbia University.
-Available at \url{http://works.bepress.com/phil_reiss/11/}.
+Available at \url{https://works.bepress.com/phil_reiss/11/}.
 
 Reiss, P. T., and Ogden, R. T. (2007).  Functional principal component
 regression and functional partial least squares.  \emph{Journal of the

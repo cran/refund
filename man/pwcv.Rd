@@ -4,8 +4,14 @@
 \alias{pwcv}
 \title{Pointwise cross-validation for function-on-scalar regression}
 \usage{
-pwcv(fdobj, Z, L = NULL, lambda, eval.pts = seq(min(fdobj$basis$range),
-  max(fdobj$basis$range), length.out = 201), scale = FALSE)
+pwcv(
+  fdobj,
+  Z,
+  L = NULL,
+  lambda,
+  eval.pts = seq(min(fdobj$basis$range), max(fdobj$basis$range), length.out = 201),
+  scale = FALSE
+)
 }
 \arguments{
 \item{fdobj}{a functional data object (class \code{fd}) giving the
@@ -82,7 +88,7 @@ axisIntervals(1)
 Reiss, P. T., Huang, L., and Mennes, M. (2010).  Fast
 function-on-scalar regression with penalized basis expansions.
 \emph{International Journal of Biostatistics}, 6(1), article 28.  Available
-at \url{http://works.bepress.com/phil_reiss/16/}
+at \url{https://works.bepress.com/phil_reiss/16/}
 }
 \seealso{
 \code{\link{fosr}}, \code{\link{lofocv}}

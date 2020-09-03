@@ -4,9 +4,20 @@
 \alias{pfr_old}
 \title{Penalized Functional Regression (old version)}
 \usage{
-pfr_old(Y, subj = NULL, covariates = NULL, funcs, kz = 10, kb = 30,
-  nbasis = 10, family = "gaussian", method = "REML",
-  smooth.option = "fpca.sc", pve = 0.99, ...)
+pfr_old(
+  Y,
+  subj = NULL,
+  covariates = NULL,
+  funcs,
+  kz = 10,
+  kb = 30,
+  nbasis = 10,
+  family = "gaussian",
+  method = "REML",
+  smooth.option = "fpca.sc",
+  pve = 0.99,
+  ...
+)
 }
 \arguments{
 \item{Y}{vector of all outcomes over all visits}
@@ -249,7 +260,7 @@ measurements. \emph{Journal of the Royal Statistical Society: Series C},
 
 Swihart, Bruce J., Goldsmith, Jeff; and Crainiceanu, Ciprian M. (July 2012). 
 Testing for functional effects. Johns Hopkins University Dept. of Biostatistics 
-Working Paper 247, available at \url{http://biostats.bepress.com/jhubiostat/paper247}
+Working Paper 247, available at \url{https://biostats.bepress.com/jhubiostat/paper247/}
 American Statistical Association, 109(508): 1425-1439.
 }
 \seealso{

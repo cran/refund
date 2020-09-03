@@ -4,12 +4,19 @@
 \alias{af_old}
 \title{Construct an FGAM regression term}
 \usage{
-af_old(X, argvals = seq(0, 1, l = ncol(X)), xind = NULL,
-  basistype = c("te", "t2", "s"), integration = c("simpson",
-  "trapezoidal", "riemann"), L = NULL, splinepars = list(bs = "ps", k =
-  c(min(ceiling(nrow(X)/5), 20), min(ceiling(ncol(X)/5), 20)), m =
-  list(c(2, 2), c(2, 2))), presmooth = TRUE, Xrange = range(X),
-  Qtransform = FALSE)
+af_old(
+  X,
+  argvals = seq(0, 1, l = ncol(X)),
+  xind = NULL,
+  basistype = c("te", "t2", "s"),
+  integration = c("simpson", "trapezoidal", "riemann"),
+  L = NULL,
+  splinepars = list(bs = "ps", k = c(min(ceiling(nrow(X)/5), 20),
+    min(ceiling(ncol(X)/5), 20)), m = list(c(2, 2), c(2, 2))),
+  presmooth = TRUE,
+  Xrange = range(X),
+  Qtransform = FALSE
+)
 }
 \arguments{
 \item{X}{an \code{N} by \code{J=ncol(argvals)} matrix of function evaluations
@@ -77,7 +84,7 @@ functional predictor must be fully observed on a regular grid
 \references{
 McLean, M. W., Hooker, G., Staicu, A.-M., Scheipl, F., and Ruppert, D. (2014). Functional
 generalized additive models. \emph{Journal of Computational and Graphical Statistics}, \bold{23 (1)},
-pp. 249-269.  Available at \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3982924}.
+pp. 249-269.  Available at \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3982924/}.
 }
 \seealso{
 \code{\link{fgam}}, \code{\link{lf}}, mgcv's \code{\link{linear.functional.terms}},

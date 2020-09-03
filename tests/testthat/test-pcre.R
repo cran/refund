@@ -2,7 +2,7 @@ context("Testing pcre")
 
 test_that("pcre works as expected", {
   skip_on_cran()
-  
+
   residualfunction <- function(t){
     #generate quintic polynomial error functions
     drop(poly(t, 5)%*%rnorm(5, sd=sqrt(2:6)))
@@ -25,7 +25,7 @@ test_that("pcre works as expected", {
   fpcE <- fpca.sc(Ehat, npc=5)
   ##expect_equal_to_reference(fpcE, "pcre.fpca.obj.rds")
   #expect_is(fpcE, "list")
-  
+
   efunctions <- fpcE$efunctions
   evalues <- fpcE$evalues
   data$id <- factor(1:nrow(data))
@@ -33,17 +33,17 @@ test_that("pcre works as expected", {
   m1 <- pffr(Y ~ 1 + pcre(id=id, efunctions=efunctions, evalues=evalues, yind=t), yind=t, data=data)
   ## expect_equal_to_reference(m1, "pcre.pffr.obj.rds")
   expect_is(m1, "pffr")
-  
+
   t1 <- predict(m1, type="terms")
   ## expect_equal_to_reference(t1, "pcre.prediction.obj.rds")
   expect_is(t1, "list")
-  
+
   expect_is(summary(m1), "summary.pffr")
 })
 
 test_that("pcre works for sparse", {
   skip_on_cran()
-  
+
   residualfunction <- function(t){
     #generate quintic polynomial error functions
     drop(poly(t, 5)%*%rnorm(5, sd=sqrt(2:6)))
@@ -66,31 +66,31 @@ test_that("pcre works for sparse", {
   fpcE <- fpca.sc(Ehat, npc=5)
   ##expect_equal_to_reference(fpcE, "pcre.fpca.obj.rds")
   #expect_is(fpcE, "list")
-  
+
   efunctions <- fpcE$efunctions
   evalues <- fpcE$evalues
-  
+
   # make sparse data:
   propmissing <- .5
   nygrid <- T
   missing <- sample(c(rep(T, propmissing*n*nygrid),
                       rep(F, n*nygrid-propmissing*n*nygrid)))
-  
+
   ydata <- data.frame(.obs = rep(1:n, each=nygrid)[!missing],
                       .index = rep(t, times=n)[!missing],
                       .value = as.vector(t(data$Y))[!missing])
-  
+
   data <- data.frame(id = factor(1:nrow(data)))
-  
+
   # refit model with fpc-based residuals
   m1 <- pffr(Y ~ 1 + pcre(id=id, efunctions=efunctions, evalues=evalues, yind=t), yind=t,
              data=data, ydata = ydata)
   ## expect_equal_to_reference(m1, "pcre.pffr.obj.rds")
   expect_is(m1, "pffr")
-  
+
   t1 <- predict(m1, type="terms")
   ## expect_equal_to_reference(t1, "pcre.prediction.obj.rds")
   expect_is(t1, "list")
-  
+
   expect_is(summary(m1), "summary.pffr")
 })

@@ -4,8 +4,17 @@
 \alias{vis.fgam}
 \title{Visualization of FGAM objects}
 \usage{
-vis.fgam(object, af.term, xval = NULL, tval = NULL, deriv2 = FALSE,
-  theta = 50, plot.type = "persp", ticktype = "detailed", ...)
+vis.fgam(
+  object,
+  af.term,
+  xval = NULL,
+  tval = NULL,
+  deriv2 = FALSE,
+  theta = 50,
+  plot.type = "persp",
+  ticktype = "detailed",
+  ...
+)
 }
 \arguments{
 \item{object}{an \code{fgam} object, produced by \code{\link{fgam}}}
@@ -88,7 +97,7 @@ vis.fgam(fit, af.term='X', deriv2=TRUE, tval=tval)
 \references{
 McLean, M. W., Hooker, G., Staicu, A.-M., Scheipl, F., and Ruppert, D. (2014). Functional
 generalized additive models. \emph{Journal of Computational and Graphical Statistics}, \bold{23(1)},
-pp. 249-269.  Available at \url{http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3982924}.
+pp. 249-269.  Available at \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3982924/}.
 
 Marra, G., and Wood, S. N. (2012) Coverage properties of confidence intervals for generalized
 additive model components. \emph{Scandinavian Journal of Statistics}, \bold{39(1)}, pp. 53--74.

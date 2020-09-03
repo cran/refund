@@ -8,19 +8,45 @@
 \alias{plot.fosr.perm}
 \title{Permutation testing for function-on-scalar regression}
 \usage{
-fosr.perm(Y = NULL, fdobj = NULL, X, con = NULL, X0 = NULL,
-  con0 = NULL, argvals = NULL, lambda = NULL, lambda0 = NULL,
-  multi.sp = FALSE, nperm, level = 0.05, plot = TRUE, xlabel = "",
-  title = NULL, prelim = if (multi.sp) 0 else 15, ...)
+fosr.perm(
+  Y = NULL,
+  fdobj = NULL,
+  X,
+  con = NULL,
+  X0 = NULL,
+  con0 = NULL,
+  argvals = NULL,
+  lambda = NULL,
+  lambda0 = NULL,
+  multi.sp = FALSE,
+  nperm,
+  level = 0.05,
+  plot = TRUE,
+  xlabel = "",
+  title = NULL,
+  prelim = if (multi.sp) 0 else 15,
+  ...
+)
 
-fosr.perm.fit(Y = NULL, fdobj = NULL, X, con = NULL, X0 = NULL,
-  con0 = NULL, argvals = NULL, lambda = NULL, lambda0 = NULL,
-  multi.sp = FALSE, nperm, prelim, ...)
+fosr.perm.fit(
+  Y = NULL,
+  fdobj = NULL,
+  X,
+  con = NULL,
+  X0 = NULL,
+  con0 = NULL,
+  argvals = NULL,
+  lambda = NULL,
+  lambda0 = NULL,
+  multi.sp = FALSE,
+  nperm,
+  prelim,
+  ...
+)
 
 fosr.perm.test(x, level = 0.05)
 
-\method{plot}{fosr.perm}(x, level = 0.05, xlabel = "", title = NULL,
-  ...)
+\method{plot}{fosr.perm}(x, level = 0.05, xlabel = "", title = NULL, ...)
 }
 \arguments{
 \item{Y, fdobj}{the functional responses, given as either an \eqn{n\times d}
@@ -130,7 +156,7 @@ axisIntervals(1)
 Reiss, P. T., Huang, L., and Mennes, M. (2010).  Fast
 function-on-scalar regression with penalized basis expansions.
 \emph{International Journal of Biostatistics}, 6(1), article 28.  Available
-at \url{http://works.bepress.com/phil_reiss/16/}
+at \url{https://works.bepress.com/phil_reiss/16/}
 }
 \seealso{
 \code{\link{fosr}}
