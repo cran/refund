@@ -25,7 +25,8 @@ fpca.face(
   method = "L-BFGS-B",
   lower = -20,
   upper = 20,
-  control = NULL
+  control = NULL,
+  periodicity = FALSE
 )
 }
 \arguments{
@@ -82,6 +83,8 @@ Otherwise, \code{\link[stats]{optim}} is used}
 \item{upper}{see \code{\link[stats]{optim}}}
 
 \item{control}{see \code{\link[stats]{optim}}}
+
+\item{periodicity}{Option for a periodic spline basis. Defaults to FALSE.}
 }
 \value{
 A list with components

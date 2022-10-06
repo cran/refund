@@ -1,8 +1,8 @@
 Package: refund
 Type: Package
 Title: Regression with Functional Data
-Version: 0.1-26
-Date: 2022-04-16
+Version: 0.1-28
+Date: 2022-10-06
 Authors@R: c(
     person("Jeff", "Goldsmith", role = "aut", email = "jeff.goldsmith@columbia.edu"),
     person("Fabian", "Scheipl", role = "aut", email = "fabian.scheipl@stat.uni-muenchen.de"),
@@ -24,7 +24,8 @@ Authors@R: c(
     person(c("David", "L."), "Miller", role="ctb", email="dave@ninepointeightone.net"),
     person("Ana-Maria", "Staicu", role="ctb", email="ana-maria_staicu@ncsu.edu"),
     person("Erjia", "Cui", role="ctb", email="ecui1@jhmi.edu"),
-    person("Ruonan", "Li", role="ctb", email="rli20@ncsu.edu"))
+    person("Ruonan", "Li", role="ctb", email="rli20@ncsu.edu"),
+    person("Zheyuan", "Li", role="ctb"))
 Depends: R (>= 3.00.0)
 Imports: fda, Matrix, lattice, boot, mgcv (>= 1.8-23), MASS, magic,
         nlme, gamm4, lme4, RLRsim, splines, grpreg, ggplot2, stats,
@@ -62,10 +63,10 @@ Collate: 'Omegas.R' 'af.R' 'af_old.R' 'amc.R' 'ccb.fpc.R'
         'f_sum2.R' 'f_sum4.R' 'f_trace.R' 'mfpca.sc.R' 'mfpca.face.R'
         'face.Cov.mfpca.R' 'fpca.lfda.R' 'predict.fbps.R'
         'select_knots.R'
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2022-04-16 16:56:27 UTC; juliawrobel
+Packaged: 2022-10-06 15:57:57 UTC; wrobelj
 Author: Jeff Goldsmith [aut],
   Fabian Scheipl [aut],
   Lei Huang [aut],
@@ -86,6 +87,7 @@ Author: Jeff Goldsmith [aut],
   David L. Miller [ctb],
   Ana-Maria Staicu [ctb],
   Erjia Cui [ctb],
-  Ruonan Li [ctb]
+  Ruonan Li [ctb],
+  Zheyuan Li [ctb]
 Maintainer: Julia Wrobel <julia.wrobel@cuanschutz.edu>
-Date/Publication: 2022-04-16 17:30:02 UTC
+Date/Publication: 2022-10-06 16:30:01 UTC
