@@ -1,5 +1,5 @@
-125e8699751108ad2ee0913e4754fa0c *DESCRIPTION
-5bc39975561f9b855c105387d9b050fc *NAMESPACE
+1c5799dfa3dcfac4b1622a1fac2b3324 *DESCRIPTION
+d07c8587c80600b57b321d602ef61928 *NAMESPACE
 9e8ee7293f8e631aa493bec1a19c0c45 *R/CD4-data.R
 d4556206c97c1b060678f95af7a81683 *R/DTI-data.R
 90ec1ff747410dd46b1e64827d619786 *R/DTI2-data.R
@@ -62,7 +62,7 @@ bde2d12a84269416bb06b401efb1382d *R/peer.R
 78e3ca1fd1d490e453b040d801b31260 *R/peer_old.R
 5edd5816a48757991887f6d83b6dfc0b *R/pffr-ff.R
 5c930dded727731d474f5b493dab36a4 *R/pffr-ffpc.R
-6ff9dd566c18ae6c990f2c7ab8a69f23 *R/pffr-methods.R
+3fe43fb9b33515088d4fd0e945b7f3e4 *R/pffr-methods.R
 7ebd45e78e494092edc5850edf0b7afa *R/pffr-pcre.R
 b00a440b3fc2c554c314254a5f7730ce *R/pffr-robust.R
 0d22801c3dd9c9c502720625d25f9ad9 *R/pffr-sff.R
@@ -187,7 +187,7 @@ d520fc399d537aa0c2d2a50142f7fcd5 *man/predict.fosr.Rd
 555e774f8cc1d1d23bffd5aab112390d *man/predict.pfr.Rd
 40940fa8a259f457aef8ec38f30645a8 *man/print.summary.pffr.Rd
 11ffa9ec31d91f57289aa2f298d33f69 *man/pwcv.Rd
-4accb1902979e9bab15d088695999364 *man/qq.pffr.Rd
+aa2b0f6ed709c7653be426c2f9340794 *man/qq.pffr.Rd
 8fe2dac6c39388810494ff7e05297f02 *man/quadWeights.Rd
 c4976cf030cd5210c1922b6aeb3c42ea *man/re.Rd
 aa9973bb933fa3b1e8b962406271303a *man/refund-internal.Rd
