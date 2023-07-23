@@ -1,4 +1,4 @@
-bfc9b2ea88a3cbaded0bb22b558488b9 *DESCRIPTION
+e6fc92c9468cb010919f506ad71be75b *DESCRIPTION
 d07c8587c80600b57b321d602ef61928 *NAMESPACE
 9e8ee7293f8e631aa493bec1a19c0c45 *R/CD4-data.R
 423e0e7e78259f82ac03416c532deb49 *R/COVID19-data.R
@@ -63,13 +63,13 @@ dfc9b0b4802607bd388f8f736ccd0ba1 *R/mfpca.face.R
 bde2d12a84269416bb06b401efb1382d *R/peer.R
 78e3ca1fd1d490e453b040d801b31260 *R/peer_old.R
 5edd5816a48757991887f6d83b6dfc0b *R/pffr-ff.R
-5c930dded727731d474f5b493dab36a4 *R/pffr-ffpc.R
+2e84254549d9fe03c6c1aab59a7fe1e3 *R/pffr-ffpc.R
 3fe43fb9b33515088d4fd0e945b7f3e4 *R/pffr-methods.R
 7ebd45e78e494092edc5850edf0b7afa *R/pffr-pcre.R
 b00a440b3fc2c554c314254a5f7730ce *R/pffr-robust.R
 0d22801c3dd9c9c502720625d25f9ad9 *R/pffr-sff.R
 21121a37471fbba396a8c109cdac9291 *R/pffr-utilities.R
-e645640bdabd5391cf7ccf9aa63ed2b1 *R/pffr.R
+58022a0991d2dc5590a0eb8f9d990c90 *R/pffr.R
 6ec53d1271d9708bd4d5eefcd88efe6d *R/pfr.R
 c20ddd15fa55c6e88432fc6e43585fb2 *R/pfr_old.R
 ca16e2f6965f670300cfbc01779d6b19 *R/pi_basis.R
@@ -79,7 +79,7 @@ b5e5847b43605f81f0d4a7f89e2af911 *R/plot.fosr.vs.R
 9d878231cf9dee0071ade44a6d70f3cc *R/plot.fpcr.R
 cfb9f89ce8ff988130e55c218eaeb976 *R/plot.lpeer.R
 77cdf94d964e56febef584e39c13a14b *R/plot.peer.R
-03bb19c7f5fab079f9e8cef40770d53c *R/plot.pfr.R
+36365b607b14ff60c7f721d709a926de *R/plot.pfr.R
 c969d9f72fd6d62855aef789faafce53 *R/poridge.R
 24968d3466ceba2286b1c656653ca3c9 *R/postprocess.pfr.R
 dc153c771713f874d978c26ef3e633eb *R/predict.fbps.R
@@ -136,7 +136,7 @@ d3fd98f4418925932eb7424741371b85 *man/f_sum4.Rd
 be02262fa89556791e100642ce1b43d2 *man/f_trace.Rd
 2f2dc572a9523a743cfd970312c11aca *man/fbps.Rd
 983508a628b33d3fdd619eb0802c2596 *man/ff.Rd
-038c26529b691720ab87bef657235cb9 *man/ffpc.Rd
+575dde02f7cbcd67a98e63be79d10d62 *man/ffpc.Rd
 f84e1a0ade8af6ff124405a32857efbd *man/ffpcplot.Rd
 c51ae9d3445f98caf851d11fbfa6d771 *man/fgam.Rd
 00588c383abb8313141e78db0a6bd030 *man/fosr.Rd
@@ -171,13 +171,13 @@ dca002e0a13860f4c041f4c6951ddeb3 *man/model.matrix.pffr.Rd
 da1df1f46bcc8eae50c29ae4742ae4a8 *man/pcre.Rd
 3a15a08fd6470d116521ad85e22d710d *man/peer.Rd
 a91d3dacb5be61666a6a197394b0b4ee *man/peer_old.Rd
-f70171bcb8975f7ca083621ce9a48c90 *man/pffr.Rd
+5b258b1bff5dbd59b2f8b0032a047106 *man/pffr.Rd
 397f27d06014db23a438e4238ce47cd1 *man/pffr.check.Rd
 c8ec2f1a933191e399a0e92ccfa0f86b *man/pffrGLS.Rd
 6d6d5df970f7a5981ba66c09e305d9c3 *man/pffrSim.Rd
 75830d70ae7f4412f4dead6413be70a6 *man/pfr.Rd
 5aa5d30f2ecffcd6b908ae09a399bab0 *man/pfr_old.Rd
-87c31cf4885f5a83981b049d98489285 *man/pfr_plot.gam.Rd
+0ee86d52b3088e51fbe0a9466385dfaf *man/pfr_plot.gam.Rd
 7aa64640f1eb0bb496b5e0f16b0fdf9e *man/plot.fosr.Rd
 d3930765745734c125046717177fbfda *man/plot.fosr.vs.Rd
 5cd8d657949646f99b103378d422e1c1 *man/plot.fpcr.Rd
@@ -196,8 +196,6 @@ d520fc399d537aa0c2d2a50142f7fcd5 *man/predict.fosr.Rd
 aa2b0f6ed709c7653be426c2f9340794 *man/qq.pffr.Rd
 8fe2dac6c39388810494ff7e05297f02 *man/quadWeights.Rd
 c4976cf030cd5210c1922b6aeb3c42ea *man/re.Rd
-aa9973bb933fa3b1e8b962406271303a *man/refund-internal.Rd
-0f825b85c6afa166407d441127f9d442 *man/refund-package.Rd
 25501a6d7edd07e7f914cd06414767c9 *man/residuals.pffr.Rd
 fcdcf1ecea47fded75c171d0d16a339f *man/rlrt.pfr.Rd
 f778a4a5b2a11c6a240c441f43adb368 *man/sff.Rd
