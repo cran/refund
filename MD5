@@ -1,4 +1,4 @@
-fafb7bd45f690b9c19d420931575c246 *DESCRIPTION
+d339659c85c059727c115cd77c5f471e *DESCRIPTION
 d07c8587c80600b57b321d602ef61928 *NAMESPACE
 9e8ee7293f8e631aa493bec1a19c0c45 *R/CD4-data.R
 423e0e7e78259f82ac03416c532deb49 *R/COVID19-data.R
@@ -56,7 +56,7 @@ d3a5b694d3eb11d3cb6641a07528ef55 *R/fpcr.setup.R
 a243ace3b5e3d45fdbe999759440e93f *R/lpeer.R
 60f29451edfde40616d4d1af7c7b1ea7 *R/lpfr.R
 86784b51fe7d2647b487b2b8d7955604 *R/lw.test.R
-dfc9b0b4802607bd388f8f736ccd0ba1 *R/mfpca.face.R
+ed78302709e71cc25573edda6bcb3226 *R/mfpca.face.R
 447c7f219f388e32c21c5f4149e58663 *R/mfpca.sc.R
 596bd27e32a2a96bfa0703f334156af3 *R/osplinepen2d.R
 0a22f2571b36f2950378e143880309be *R/parse.predict.pfr.R
@@ -163,7 +163,7 @@ dc1807b20cdbe8f1049e337c5e220bdc *man/gls_cs.Rd
 8286f2d3d1a4f4ffbd1d28599f9251b2 *man/lofocv.Rd
 185bfc8bd40be9f4a0ee05e1aac74b1d *man/lpeer.Rd
 47f57b37da9031d1707e310181d5af3e *man/lpfr.Rd
-d699b5d3693d238076de633b629fa044 *man/mfpca.face.Rd
+a2b2163ff5ba4da7957d2297c95be57f *man/mfpca.face.Rd
 4ad1a5a046279bc1f53cdc0753413cf1 *man/mfpca.sc.Rd
 dca002e0a13860f4c041f4c6951ddeb3 *man/model.matrix.pffr.Rd
 1d3af32de7bac4d097690103119c17aa *man/ols_cs.Rd
@@ -217,10 +217,10 @@ e783eee17b70089dad32ea1fdc1406e7 *man/vis.fgam.Rd
 085752a5ef07d4b10384240872c3b645 *man/vis.pfr.Rd
 0fc1c206e6699e9d8099144b0ae8b719 *tests/testthat.R
 8c5a2f9b5c55e0f544c35f6e4dec42ca *tests/testthat/test-fosr.R
-6bd45b417ceb9f3a665771450ea160b8 *tests/testthat/test-fpca.R
+1d63909cb95c58ef1f0f48d6632e350c *tests/testthat/test-fpca.R
 947bf867977b4ca1e40c35e998390a84 *tests/testthat/test-fpcr.R
 1b18e628beaca4ab8f6041c8fd8b8fba *tests/testthat/test-lpfr.R
-fe11d76ddb6ac84d6fb94950ab7b8642 *tests/testthat/test-mfpca.R
+6e22e516af08e777119928830caac2c9 *tests/testthat/test-mfpca.R
 fb0f045fdbbde12377bde47cd2f179fb *tests/testthat/test-pcre.R
 05f34387c9636edaff5309ccc58b0e85 *tests/testthat/test-peer.R
 0a2391b552d8bb7d20a9509bb33889b7 *tests/testthat/test-pffr.R
