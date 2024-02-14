@@ -104,5 +104,5 @@ Fast covariance estimation for high-dimensional functional data.
 \emph{Statistics and Computing}, 26, 409-421.
 }
 \author{
-Ruonan Li \email{rli20@ncsu.edu}, Erjia Cui \email{ecui1@jhmi.edu}
+Ruonan Li \email{rli20@ncsu.edu}, Erjia Cui \email{ecui@umn.edu}
 }

@@ -53,7 +53,7 @@
 #' variance in the observed curves for levels 1 and 2.}
 #' \item{sigma2}{Estimated measurement error variance.}
 #'
-#' @author Ruonan Li \email{rli20@@ncsu.edu}, Erjia Cui \email{ecui1@@jhmi.edu}
+#' @author Ruonan Li \email{rli20@@ncsu.edu}, Erjia Cui \email{ecui@@umn.edu}
 #'
 #' @references Cui, E., Li, R., Crainiceanu, C., and Xiao, L. (2023). Fast multilevel
 #' functional principal component analysis. \emph{Journal of Computational and
