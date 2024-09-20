@@ -29,6 +29,10 @@
 #' number of principal components for both levels.
 #' @param npc Pre-specified value for the number of principal components.
 #' If given, this overrides \code{pve}.
+#' @param pve2 Proportion of variance explained in level 2. If given, this overrides
+#' the value of \code{pve} for level 2.
+#' @param npc2 Pre-specified value for the number of principal components in level 2.
+#' If given, this overrides \code{npc} for level 2.
 #' @param p The degree of B-splines functions to use. Defaults to 3.
 #' @param m The order of difference penalty to use. Defaults to 2.
 #' @param knots Number of knots to use or the vectors of knots. Defaults to 35.
@@ -80,7 +84,8 @@
 #' mfpca.DTI <- mfpca.face(Y = DTI$cca, id = DTI$ID, twoway = TRUE)
 
 mfpca.face <- function(Y, id, visit = NULL, twoway = TRUE, weight = "obs", argvals = NULL,
-                        pve = 0.99, npc = NULL, p = 3, m = 2, knots = 35, silent = TRUE){
+                       pve = 0.99, npc = NULL, pve2 = NULL, npc2 = NULL, p = 3, m = 2, 
+                       knots = 35, silent = TRUE){
 
   pspline.setting.mfpca <- function(x,knots=35,p=3,m=2,weight=NULL,type="full",
                                     knots.option="equally-spaced"){
@@ -93,7 +98,7 @@ mfpca.face <- function(Y, id, visit = NULL, twoway = TRUE, weight = "obs", argva
     }
     s.object = s(x=x, bs=bs, k=K+p, m=c(p-1,2), sp=NULL)
     object  = smooth.construct(s.object,data = data.frame(x=x),knots=list(x=knots))
-    P =  object$S[[1]]
+    P = object$S[[1]]
 
     if(knots.option == "quantile") P = P / max(abs(P))*10 # rescaling
 
@@ -279,7 +284,12 @@ mfpca.face <- function(Y, id, visit = NULL, twoway = TRUE, weight = "obs", argva
   smooth.Gw <- face.Cov.mfpca(Y=YR, argvals, A0, B, Anew, Bnew, G_invhalf, s)
   sigma.Gw <- smooth.Gw$evalues # raw eigenvalues of Gw
   per <- cumsum(sigma.Gw)/sum(sigma.Gw)
-  N.Gw <- ifelse (is.null(npc), min(which(per>pve)), min(npc, length(sigma.Gw)))
+  if (is.null(pve2)) pve2 <- pve
+  if (!is.null(npc)){
+    if (is.null(npc2)) npc2 <- npc
+  }
+  N.Gw <- ifelse (is.null(npc2), min(which(per>pve2)), min(npc2, length(sigma.Gw)))
+  pve2 <- per[N.Gw]
   smooth.Gw$efunctions <- smooth.Gw$efunctions[,1:N.Gw]
   smooth.Gw$evalues <- smooth.Gw$evalues[1:N.Gw]
   rm(Ji, diagD, inx_row_ls, weights, weight, Ysubm, YR, B, Anew, G_invhalf, s, per, N.Gw, sigma.Gw)
@@ -298,7 +308,7 @@ mfpca.face <- function(Y, id, visit = NULL, twoway = TRUE, weight = "obs", argva
   per <- cumsum(d)/sum(d)
   N.Gb <- ifelse (is.null(npc), min(which(per>pve)), min(npc, length(d)))
   smooth.Gb <- list(evalues=Sigma[1:N.Gb], efunctions=Bnew%*%Eigen$vectors[,1:N.Gb])
-  pve  <- per[N.Gb]
+  pve1  <- per[N.Gb]
   rm(smooth.Gt, temp, Eigen, Sigma, d, per, N.Gb, Bnew)
 
 
@@ -311,6 +321,7 @@ mfpca.face <- function(Y, id, visit = NULL, twoway = TRUE, weight = "obs", argva
   efunctions <- list(level1=as.matrix(smooth.Gb$efunctions), level2=as.matrix(smooth.Gw$efunctions))
   evalues <- list(level1=smooth.Gb$evalues,level2=smooth.Gw$evalues)
   npc <- list(level1=length(evalues[[1]]), level2=length(evalues[[2]]))
+  pve <- list(level1 = pve1, level2 = pve2)
   names(efunctions) <- names(evalues) <- names(npc) <- c("level1", "level2")
   rm(smooth.Gb, smooth.Gw)
 
@@ -347,7 +358,7 @@ mfpca.face <- function(Y, id, visit = NULL, twoway = TRUE, weight = "obs", argva
     for(j in 1:length(unVisits)){
       Jm <- unVisits[j]
       ## calculate block matrices
-      if(sigma2 < 1e-4){
+      if(sigma2 < 1e-10){
         A <- Jm * (t(phi1) %*% phi1)
         B <- matrix(rep(t(phi1) %*% phi2, Jm), nrow = npc[[1]])
         temp <- ginv(t(phi2) %*% phi2)
@@ -381,7 +392,7 @@ mfpca.face <- function(Y, id, visit = NULL, twoway = TRUE, weight = "obs", argva
       int1 <- rowsum(df$Ytilde[which(df$id %in% ind.Jm),] %*% phi1, rep(1:length(ind.Jm), each = Jm))
       int2 <- t(matrix(t(df$Ytilde[which(df$id %in% ind.Jm),] %*% phi2), nrow = npc[[2]]*Jm))
       int <- cbind(int1, int2)
-      if(sigma2 >= 1e-4){
+      if(sigma2 >= 1e-10){
         int <- int / sigma2
       }
       score1[which(nVisits$id %in% ind.Jm),] <- int %*% t(Mat1)
@@ -403,7 +414,7 @@ mfpca.face <- function(Y, id, visit = NULL, twoway = TRUE, weight = "obs", argva
     for(m in 1:I){
       Jm <- nVisits[m, 2]  ## number of visits for mth subject
       ## calculate block matrices
-      if(sigma2 < 1e-4){
+      if(sigma2 < 1e-10){
         A <- Jm * (t(phi1) %*% phi1)
         B <- matrix(rep(t(phi1) %*% phi2, Jm), nrow = npc[[1]])
         temp <- ginv(t(phi2) %*% phi2)
@@ -434,7 +445,7 @@ mfpca.face <- function(Y, id, visit = NULL, twoway = TRUE, weight = "obs", argva
       ## estimate the principal component scores
       int1 <- colSums(matrix(df$Ytilde[df$id==ID[m],], ncol = L) %*% phi1)
       int2 <- matrix(df$Ytilde[df$id==ID[m],], ncol = L) %*% phi2
-      if(sigma2 < 1e-4){
+      if(sigma2 < 1e-10){
         int <- c(int1, as.vector(t(int2)))
       }else{
         int <- c(int1, as.vector(t(int2))) / sigma2
