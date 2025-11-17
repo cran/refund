@@ -1,8 +1,8 @@
 Package: refund
 Type: Package
 Title: Regression with Functional Data
-Version: 0.1-37
-Date: 2024-09-20
+Version: 0.1-38
+Date: 2025-11-17
 Authors@R: c(
     person("Jeff", "Goldsmith", role = "aut", email = "jeff.goldsmith@columbia.edu"),
     person("Fabian", "Scheipl", role = "aut", email = "fabian.scheipl@stat.uni-muenchen.de"),
@@ -65,10 +65,10 @@ Collate: 'Omegas.R' 'af.R' 'af_old.R' 'amc.R' 'ccb.fpc.R'
         'XtSiginvX.R' 'bayes_fosr.R' 'f_sum.R' 'f_sum2.R' 'f_sum4.R'
         'f_trace.R' 'mfpca.sc.R' 'mfpca.face.R' 'face.Cov.mfpca.R'
         'fpca.lfda.R' 'predict.fbps.R' 'select_knots.R'
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2024-09-20 21:05:34 UTC; JWROBE8
+Packaged: 2025-11-17 13:44:47 UTC; JWROBE8
 Author: Jeff Goldsmith [aut],
   Fabian Scheipl [aut],
   Lei Huang [aut],
@@ -92,4 +92,4 @@ Author: Jeff Goldsmith [aut],
   Ruonan Li [ctb],
   Zheyuan Li [ctb]
 Maintainer: Julia Wrobel <julia.wrobel@emory.edu>
-Date/Publication: 2024-09-20 21:50:02 UTC
+Date/Publication: 2025-11-17 14:20:02 UTC
